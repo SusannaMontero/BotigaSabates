@@ -8,23 +8,25 @@ include '../CON_BBDD/ConexioDB.php';
 
 class MetodesDAO    {
 
-    public function LlistarProductes ()  {
-    //instancio la classe ConexioDB i creo un objecte con de tipus ConexioDB
+// Funció per llistar els productes del catàleg que tinc a la BBDD fent un SELECT. Aquesta funció la crido a la pàgina BotigaDAO
+    public function llistarProductes ()  {
+   
+    // instancio la classe ConexioDB i creo un objecte con de tipus ConexioDB
 
-        $con = new ConexioDB ();
+        $con=new ConexioDB();
 
     //crido al mètode amb la fletxa i guardo la connexió a la variable conOk
 
-        $conOK = $con->getConexio ();
+        $conOK=$con->getConnexio();
 
-    //faig la consulta a la BBDD amb una sentència SELECT per llistar els productes que guardo a la variable res i que després mitjançant un foreach aniré desant a l'array llista
-            //comando prepare permet preparar la sentència SQL abans de ser executada
+    // faig la consulta a la BBDD amb una sentència SELECT per llistar els productes que guardo a la variable res i que després mitjançant un foreach aniré desant a l'array llista
+            // comando prepare permet preparar la sentència SQL abans de ser executada
 
-        $res = $conOK->prepare ("select * from productes");
-            //executem el select i el resultat el deso a res
+        $res=$conOK->prepare ("select * from productes");
+            // executem el select i el resultat el deso a res
         $res->execute();
 
-            //guardo a l'array descomponent per files(row)
+            // guardo a l'array descomponent per files(row)
         foreach ($res as $row) {
             $llista[] = $row;
         }
@@ -32,4 +34,24 @@ class MetodesDAO    {
         return $llista;
 
     }
+
+// Funció per llistar els productes per codi que tinc a la BBDD, rep com paràmetre el codi del producte ja que en aquest cas vull seleccionar que llisto segons el codi.
+    // aquesta funció la crido a la pàgina de detall
+    public function llistarProductesCod ($cod)  {
+
+            $con=new ConexioDB();
+            $conOK=$con->getConnexio();
+    
+        // faig la consulta a la BBDD amb una sentència SELECT però aquí afegeixo el where per seleccionar segons el codi de producte
+
+            $res=$conOK->prepare ("select * from productes where codPro = $cod");
+            $res->execute();
+    
+            foreach ($res as $row) {
+                $llista[] = $row;
+            }
+    
+            return $llista;
+    
+        }
 }
