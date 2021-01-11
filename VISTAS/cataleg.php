@@ -49,39 +49,48 @@ $llista = $_SESSION['llista'];
             </table>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal Bootstrap-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detall del Producte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="mostrar">
+                    ...
+                </div>
+                </div>
             </div>
         </div>
-        </div>
-
-    <!-- Funció que em permet enviar a la pàgina detal.php el codi de producte quan click a Agregar, crido la funció a la pàgina detall.php
+    
+    <!-- Codi Ajax per crear la finestra emergent amb el producte sel.leccionat -->
+    <!-- Funció que em permet enviar a la pàgina detall.php el codi de producte quan click a Agregar, crido la funció a la pàgina detall.php
         cada cop que premo Agregar estic cridant al mètode enviar que rep com a paràmetre el codi de producte i em direcciono cap a la pàgina detall.php enviant-li també com a paràmetre el codi-->
         <script>
+
+            var resultado = document.getElementById("mostrar");
             function enviar(codi) {
-                                                                        //location.href="detall.php?cod="+codi;
-                
+                                                            
                 var xmlhttp;
                 if (window.XMLHttpRequest)  {
                     xmlhttp=new XMLHttpRequest();
                 }else {
-                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP")
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                 }
+
+    // Funció que em permet accedir a un div en concret a través d'una variable que es dirà reslutat            
+                xmlhttp.onreadystatechange=function () {
+
+                    // amb aquest if concreto que si la pàgina o l'estat de la pàgina és correcte, és a dir no hi ha error de not found 404
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)   {
+                            resultado.innerHTML=xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open ("GET","Detall.php?cod="+codi,true);
+                xmlhttp.send();
             }
         </script>
         <!-- Optional JavaScript -->

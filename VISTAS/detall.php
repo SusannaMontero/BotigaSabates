@@ -53,7 +53,7 @@ foreach ($llista as $row) {
                     <td align = "right">Quantitat: <input type="number" min="1" max="10" value="1" name="txtQuantitat"></td>
                 </tr>
                 <tr>
-                    <th align = "right">
+                    <th align = "right" colspan="2">
                         <button type="button" class="btn btn-secondary">Tancar</button>
                         <button type="button" class="btn btn-primary">Agregar al Carret</button>
                     </th>
