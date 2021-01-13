@@ -55,10 +55,14 @@ foreach ($llista as $row) {
                 <tr>
                     <th align = "right" colspan="2">
                         <button type="button" class="btn btn-secondary">Tancar</button>
-                        <button type="button" class="btn btn-primary">Agregar al Carret</button>
+                        <button type="button" class="btn btn-primary">Agregar a la Cistella</button>
                     </th>
                 </tr>
             </table>
+<!-- abans de tancar el form enviem els paràmetres amb un input ocult a Botiga.DAO, primer el 'cod', segon l'acció d¡agregar i tercer la opció pel switch que sigui la 2 -->
+                <input type="hidden" name="id" value="<?php echo $cod; ?>">
+                <input type="hidden" name="action" value="agregar">
+                <input type="hidden" name="opcio" value="2">
         </form>
     </body>
 </html>
