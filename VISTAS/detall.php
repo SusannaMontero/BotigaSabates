@@ -37,7 +37,9 @@ foreach ($llista as $row) {
         <title></title>
     </head>
     <body>
-        <form>
+        <!-- envio el formulari cap a BotigaDAO pk és on recullo els paràmetres segons els quals vaig una opció o una altra del switch, i aleshores Botiga.DAO recull els valors, 
+                crea la cistella i es dirigeix cap a VISTAS cistella.php per poder visualitzar les dades que s'han enmagatzemat en les variables d tipus sessió -->
+        <form action=".../DAO/BotigaDAO.php">
             <table border = "0">
                 <tr> 
                     <th rowspan="4"><img src="../IMATGES/<?php echo $img; ?>" width="200" height="170"></th>
