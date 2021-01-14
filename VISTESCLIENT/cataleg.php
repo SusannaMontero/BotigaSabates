@@ -3,7 +3,7 @@
 <!--totes les pàgines que treballen amb variables de sessió han de tenir el session_start-->
 
 <?php
-session_start ();
+session_start();
 
 //porto la llista de productes
 
@@ -89,7 +89,7 @@ $llista = $_SESSION['llista'];
                             resultado.innerHTML=xmlhttp.responseText;
                     }
                 }
-                xmlhttp.open ("GET","Detall.php?cod="+codi,true);
+                xmlhttp.open("GET","Detall.php?cod="+codi,true);
                 xmlhttp.send();
             }
         </script>

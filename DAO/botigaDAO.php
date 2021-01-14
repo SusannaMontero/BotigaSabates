@@ -16,12 +16,12 @@ include './MetodesDAO.php';
 // REQUEST per recollir valors [la opció triada]
 // unset, ens neteja la llista que stà a la variable de tipus sessió
 
-$opcio = $_REQUEST ['opcio'];
+$opcio = $_REQUEST['opcio']; 
 
 switch ($opcio) {
     case 1:
         //netejo
-        unset ($_SESSION ['llista']);
+        unset ($_SESSION['llista']);
 
         //a l'instanciar la classe MetodesDAO i crear objMetode, aquest podrà fer servir tots els mètodes de la classe MetodesDAO
         //instancio
@@ -33,11 +33,11 @@ switch ($opcio) {
 
         //necessito que la llista es mantingui operativa mentre duri la sessió de l'usuari, per això la variable llista omple la varialbe SESSION i es mantingui activa i amb dades
         //guardo llista a sessió
-        $_SESSION ['llista'] = $llista;
+        $_SESSION['llista'] = $llista;
 
         //em ridercciono amb un location cap a la carpeta Vista on tinc el catàleg, això sempre que sigui la opcio1 del switch
         //redirecciono a catàleg
-        header ("Location: ../VISTAS/Cataleg.php");
+        header ("Location: ../VISTESCLIENT/Cataleg.php");
         break;
 
 // Llògica de la cistella de la compra, 
@@ -46,10 +46,11 @@ switch ($opcio) {
     case 2:
 
         /* isset tornarà FALSE si troba una variable que ha sigut definida com a NULL, així el primer if serà per confirmar que el valor que rep no és buit (NULL),
-             si en canvi rep valor el guardarà a la viariable id, else per si rep el valor buit aleshores valido amb 1 */
+             si en canvi rep valor el guardarà a la viariable id, else per si rep el valor buit aleshores valido amb 1 
+             Amb $_REQUEST per defecte de PHP es rep un valor */
             
-        if (isset ($_REQUEST ['id']))   {
-            $id = $_REQUEST ['id'];
+        if (isset ($_REQUEST['id']))   {
+            $id = $_REQUEST['id'];
         } 
         else {
             $id = 1;
@@ -58,33 +59,36 @@ switch ($opcio) {
         /* condicional que em permet validar si la cistella és plena o és buida, aquí valido amb action, en lloc d'id, si rebo un action és que la cistella és plena si no
             és que la cistella és buida */
 
-        if (isset ($_REQUEST ['action']))   {
-            $id = $_REQUEST ['action'];
+        if (isset($_REQUEST['action']))   {
+            $action = $_REQUEST['action'];
         } 
         else {
-            $id = 'cistellaBuida';
+            $action = 'cistellaBuida';
         }  
         
         /* switch sobre action, per determinar que pasarà segons l'action que tinguem: agregar, eliminar o cistella buida */
 
         switch ($action)    {
             case 'agregar':
-                $quantitat = $_REQUEST ['txtCan'];
+                $quantitat=$_REQUEST['txtCan'];
                 /* if la cistella no ariba buida serà la variable de sessió cistella amb un id concret + igual a la quantitat que rep (se li afegirà o sumarà), +=(acumulador)
                     creo una variable de sessió cistella per cada producte que afegeixo a la cistella, així després per eliminar un producte em serà més fàcil*/
-                if (isset ($_SESSION ['cistella']['id']))
-                    $_SESSION ['cistella']['id']+= $quantitat;
+                if (isset($_SESSION['cistella'][$id]))
+                    $_SESSION['cistella'][$id]+=$quantitat;
+
+                else
+                    $_SESSION['cistella'][$id]=$quantitat;
 
                 break;
 
             case 'eliminar': 
                 /* si la variable de sessió cistella arriba plena li resto 1 amb --, si anem treient productes i queda = 0 aleshores elimino la variable 
                     de sessió que s'ha creat per aquell producte */
-                if (isset ($_SESSION ['cistella']['id']))   {
-                    $_SESSION ['cistella']['id'] -- ;
+                if (isset ($_SESSION['cistella'][$id]))   {
+                    $_SESSION['cistella'][$id] -- ;
                     //però
-                    if ($_SESSION ['cistella']['id'] == 0)
-                        unset ($_SESSION ['cistella']['id']);
+                    if ($_SESSION['cistella'][$id] == 0)
+                        unset ($_SESSION['cistella'][$id]);
                 }
 
                 break;
@@ -95,10 +99,10 @@ switch ($opcio) {
                 break;
         }
 
-        /* Un cop finalitzada l'acció sobre la cistella de la compra el que faig és redireccionar cap a VISTAS i cap a pàgina de la cistella on es llegeig la cistella que 
+        /* Un cop finalitzada l'acció sobre la cistella de la compra el que faig és redireccionar cap a VISTESCLIENT i cap a pàgina de la cistella on es llegeig la cistella que 
             acabo de crear (header, predefinit php) */
 
-        header ("Location: ../VISTAS/cesta.php");
+        header ("Location: ../VISTESCLIENT/cistella.php");
         
 
         break;

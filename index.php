@@ -15,7 +15,7 @@
 
 <!--només entrar a la web entra a l'index i automaticament cridem al mètode ingresar per començar a visualitzar el catàleg amb onload-->
 
-<body onload="ingresar ()">
+<body onload="ingresar()">
 
 </body>
 
