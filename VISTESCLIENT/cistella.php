@@ -36,25 +36,29 @@
                 if (isset ($_SESSION['cistella'])) {
                     $total = 0;
                 // amb el foreach recorro la variable de sessió que es diu cistella i trec els id i els poso a la quantitat
-                    foreach ($_SESSION['cistella'] as $id=>$quanti) {
+                    foreach ($_SESSION['cistella'] as $id=>$quantitat) {
                         $objMetodes=new MetodesDAO();
                     // dels productes que mostraré a la cistella serà igual a objecteMetodes i crido a llistarProductesCod(que és a MetodesDAO) i passo per paràmetre l'id
                         $llista=$objMetodes->llistarProductesCod($id);
 
-                        
+        // prova //////////////////////
+                    foreach ($llista as $row) {
+                        $nom = $row [1];
+                        $preu = $row [2];
+                    }
+
                     // mostrem doncs
-                        $nom=$llista[1];
-                        $preu=$llista[2];
-                        $cost=$quanti*$preu;
+                       /* $nom=$llista[1];
+                        $preu=$llista[2];*/
+                        $cost=$quantitat*$preu;
                         $total=$total+$cost;
-                       echo '<p>'.$id.'</p>';
                         ?>
                 <tr>
                     <td><?php echo $nom; ?></td>
                     <td><?php echo $preu; ?></td>
                 <!-- posem href per anar al switch amb la opció 2 i la opció de restar productes i li he d'enviar l'id del producte que ha de restar, l'id es troba a un php amb la variable id
                     poso & per concatenar tot el que he d'enviar-->
-                    <td><?php echo $quanti; ?><a href="../DAO/botigaDAO.php?id=<?php echo $id ?>$action=eliminar" class="btn-secondary">-</a></td>
+                    <td><?php echo $quantitat; ?><a href="../DAO/botigaDAO.php?id=<?php echo $id ?>$action=eliminar" class="btn-light">&nbsp - Menys</a></td>
                     <td><?php echo $cost; ?></td>
                 </tr>
 

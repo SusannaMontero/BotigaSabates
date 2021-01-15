@@ -70,7 +70,7 @@ switch ($opcio) {
 
         switch ($action)    {
             case 'agregar':
-                $quantitat=$_REQUEST['txtCan'];
+                $quantitat=$_REQUEST['txtQuantitat'];
                 /* if la cistella no ariba buida serà la variable de sessió cistella amb un id concret + igual a la quantitat que rep (se li afegirà o sumarà), +=(acumulador)
                     creo una variable de sessió cistella per cada producte que afegeixo a la cistella, així després per eliminar un producte em serà més fàcil*/
                 if (isset($_SESSION['cistella'][$id]))

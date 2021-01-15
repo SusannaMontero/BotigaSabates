@@ -24,6 +24,8 @@ $llista = $_SESSION['llista'];
     </head>
 
     <body>
+
+  
         <div class="container-fluid">
                     <h2>CATALEG DE PRODUCTES</h2>
             <table border="0" width="700" align="center" class="table">
@@ -89,7 +91,7 @@ $llista = $_SESSION['llista'];
                             resultado.innerHTML=xmlhttp.responseText;
                     }
                 }
-                xmlhttp.open("GET","Detall.php?cod="+codi,true);
+                xmlhttp.open("GET","detall.php?cod="+codi,true);
                 xmlhttp.send();
             }
         </script>
