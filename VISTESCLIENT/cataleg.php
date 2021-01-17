@@ -3,11 +3,13 @@
 <!--totes les pàgines que treballen amb variables de sessió han de tenir el session_start-->
 
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 session_start();
 
 //porto la llista de productes
 
 $llista = $_SESSION['llista'];
+$num
 
 ?>
 
@@ -24,27 +26,47 @@ $llista = $_SESSION['llista'];
     </head>
 
     <body>
+
     <!-- Menu Bootstrap -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div class="container">
                 <span class="navbar-toggle-icon"></span>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="cistella.php">Cistella</a>
+                    </li>
+            <!-- valido sessió, de tal manera que si var de sessió 'acces' és buida o diferent de true apareixerà el registre -->
+                    <?php
+                        if (!isset ($_SESSION['acces']) || $_SESSION['acces']<>true) {
+
+                    ?>
+
                     <li class="nav-item">
                         <a class="nav-link" href="registre.php">Registre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cistella.php">Cistella</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">Inici de Sessió</a>
                     </li>
+                    
+            <!-- en cas que la var de sessió no sigui buida o sigui true aleshores apareix el missatge de benvinguda + el nom de l'usuari -->
+                    <?php
+                        }
+                        else{
+                    ?>
+
                     <li class="nav-item">
-                        <a class="nav-link"></a>
+                        <a class="nav-link">Benvinguda/Benvingut <?php echo $_SESSION['nom']; ?></a>
                     </li>
                     <li class="nav-item">
                         <a href="tancar.php" class="nav-link">Tancar Sessió</a>
                     </li>
+
+                    <?php
+                        }
+                    ?>
+
                 </ul>
             </div>
           </div>
@@ -58,15 +80,13 @@ $llista = $_SESSION['llista'];
                 <tr align="center">
 
             <?php
-
-                foreach ($llista as $registre)   {
-                    if($num==3) {
-                        echo "<tr align=center>";
-                        $num=1;
-                    }else{
-                        $num++;
-                    }
-                
+                    foreach ($llista as $registre)   {
+                        if(($num==3)) {
+                            echo "<tr align=center>";
+                            $num=1;
+                        }else{
+                            $num++;
+                        }
                     ?>
                 <th><img src="../IMATGES/<?php echo $registre[6]?>" width="180" height="180"><br><br>
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick="enviar(<?php echo $registre[0];?>)">Veure</button></th>

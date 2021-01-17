@@ -20,8 +20,56 @@
     </head>
 
     <body>
+
+
+    <!-- Menu Bootstrap -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+          <div class="container">
+                <span class="navbar-toggle-icon"></span>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cistella.php">Cistella</a>
+                    </li>
+            <!-- valido sessió, de tal manera que si var de sessió 'acces' és buida o diferent de true apareixerà el registre -->
+                    <?php
+                        if (!isset ($_SESSION['acces']) || $_SESSION['acces']<>true) {
+
+                    ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="registre.php">Registre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">Inici de Sessió</a>
+                    </li>
+                    
+            <!-- en cas que la var de sessió no sigui buida o sigui true aleshores apareix el missatge de benvinguda + el nom de l'usuari -->
+                    <?php
+                        }
+                        else{
+                    ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link">Benvinguda/Benvingut <?php echo $_SESSION['nom']; ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tancar.php" class="nav-link">Tancar Sessió</a>
+                    </li>
+
+                    <?php
+                        }
+                    ?>
+
+                </ul>
+            </div>
+          </div>
+        </nav>
+    <!-- fi del menú -->
+
+
         <div class="container">
-            <h2 align="center">Cistella de Productes</h2>
+            <h2 align="center" style="margin-top: 80px">Cistella de Productes</h2>
             <table border="1" align="center" width="400" class="table">
 
                 <tr style ="background: lightblue">
