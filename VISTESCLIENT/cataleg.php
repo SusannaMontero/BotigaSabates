@@ -24,10 +24,36 @@ $llista = $_SESSION['llista'];
     </head>
 
     <body>
+    <!-- Menu Bootstrap -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+          <div class="container">
+                <span class="navbar-toggle-icon"></span>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="registre.php">Registre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cistella.php">Cistella</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">Inici de Sessió</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tancar.php" class="nav-link">Tancar Sessió</a>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </nav>
+    <!-- fi del menú -->
 
   
         <div class="container-fluid">
-                    <h2>CATALEG DE PRODUCTES</h2>
+                    <h2 align="center" style="margin-top: 80px;">CATÀLEG DE PRODUCTES</h2>
             <table border="0" width="700" align="center" class="table">
                 <tr align="center">
 
@@ -35,15 +61,15 @@ $llista = $_SESSION['llista'];
 
                 foreach ($llista as $registre)   {
                     if($num==3) {
-                        echo "<tr align='center'>";
+                        echo "<tr align=center>";
                         $num=1;
                     }else{
                         $num++;
                     }
                 
                     ?>
-                <th><img src="../IMATGES/<?php echo $registre[6]?>" width="120" height="120"><br><br>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick="enviar(<?php echo $registre[0];?>)">Agregar</button></th>
+                <th><img src="../IMATGES/<?php echo $registre[6]?>" width="180" height="180"><br><br>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick="enviar(<?php echo $registre[0];?>)">Veure</button></th>
                 
                 <?php
                 }  
@@ -51,20 +77,57 @@ $llista = $_SESSION['llista'];
             </table>
         </div>
 
-        <!-- Modal Bootstrap-->
+        <!-- Modal Bootstrap detall-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detall del Producte</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detall del Producte</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 <div class="modal-body" id="mostrar">
                     ...
                 </div>
+                <div class="modal-footer"></div>
                 </div>
+            </div>
+        </div>
+
+         <!-- Modal Bootstrap login-->
+         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
+         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="valida.php">
+                        <div class="modal-body" id="mostrar">
+
+                            <table border="0" align="center">
+                                <tr>
+                                    <td>Usuari: </td>
+                                    <td><input type="text" name="txtUsu"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td><input type="pasword" name="txtPas"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary">Tancar</button>
+                            <button class="btn btn-primary" onclick="submit()">Iniciar Sessió</button>
+                        </div>
+                        <!-- Registre després serà un hipervincle -->
+                            <h6 align="center">No hi ets? Registra't</h6>
+                    </form>
+                </div>                  
             </div>
         </div>
     
