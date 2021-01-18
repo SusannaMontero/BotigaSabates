@@ -126,10 +126,46 @@
         <!-- creo botons per poder tornar al catàleg, eliminar cistella i realitzar pagament -->
             <h6 align="center"></h6>
                 <a href="cataleg.php" class="btn btn-primary">Seguir comprant</a>
-                <a href="../DAO/botigaDAO.php?action=cistellaBuida&opcio=2" class="btn btn-primary">Anul.lar Cistella</a>
+                <a href="../DAO/botigaDAO.php?action=cistellaBuida&opcio=2" class="btn btn-primary">Buidar Cistella</a>
                 <button class="btn btn-secondary">Realitzar Pagament</button>
 
         </div>
+
+     <!-- Modal Bootstrap login-->
+         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
+         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="valida.php">
+                        <div class="modal-body" id="mostrar">
+
+                            <table border="0" align="center">
+                                <tr>
+                                    <td>Usuari: </td>
+                                    <td><input type="text" name="txtUsu"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td><input type="pasword" name="txtPas"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary">Tancar</button>
+                            <button class="btn btn-primary" onclick="submit()">Iniciar Sessió</button>
+                        </div>
+                        <!-- Registre després serà un hipervincle -->
+                            <h6 align="center"><a href="registre.php">No hi ets? Registra't</a></h6>
+                    </form>
+                </div>                  
+            </div>
+        </div>   
 
             <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

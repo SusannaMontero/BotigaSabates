@@ -145,7 +145,7 @@ $num
                             <button class="btn btn-primary" onclick="submit()">Iniciar Sessió</button>
                         </div>
                         <!-- Registre després serà un hipervincle -->
-                            <h6 align="center">No hi ets? Registra't</h6>
+                            <h6 align="center"><a href="registre.php">No hi ets? Registra't</a></h6>
                     </form>
                 </div>                  
             </div>

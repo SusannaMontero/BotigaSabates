@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title></title>
     <script>
-        //creo una funció per redireccionar a botigaDAO amb opcio = 1 i al switch executarà el case 1
+        //creo una funció per redireccionar a botigaDAO amb opcio = 1 i al switch executarà el case 1, d'aquesta manera es crea la llista i es mostren els productes
         function ingresar() {
             location.href = "DAO/botigaDAO.php?opcio=1";
         }
