@@ -30,13 +30,14 @@ $num
     <!-- Menu Bootstrap -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div class="container">
+             <span class="navbar-text">Botiga de Sabates Su</span>
                 <span class="navbar-toggle-icon"></span>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                   
                     <li class="nav-item">
                         <a class="nav-link" href="cistella.php">Cistella</a>
                     </li>
+    <!-- Inici de sessió o Login -->
             <!-- valido sessió, de tal manera que si var de sessió 'acces' és buida o diferent de true apareixerà el registre -->
                     <?php
                         if (!isset ($_SESSION['acces']) || $_SESSION['acces']<>true) {

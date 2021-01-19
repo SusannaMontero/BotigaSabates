@@ -25,6 +25,7 @@
     <!-- Menu Bootstrap -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div class="container">
+            <span class="navbar-text">Botiga de Sabates Su</span>
                 <span class="navbar-toggle-icon"></span>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
