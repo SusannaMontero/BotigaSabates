@@ -25,6 +25,7 @@ include '../DAO/MetodesDAO.php';
     <!-- Menu Bootstrap -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div class="container">
+             <span class="navbar-text">Botiga de Sabates Su</span>
                 <span class="navbar-toggle-icon"></span>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
@@ -44,6 +45,7 @@ include '../DAO/MetodesDAO.php';
                     <li class="nav-item">
                         <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">Inici de Sessió</a>
                     </li>
+                    
                     
             <!-- en cas que la var de sessió no sigui buida o sigui true aleshores apareix el missatge de benvinguda + el nom de l'usuari -->
                     <?php
@@ -68,7 +70,9 @@ include '../DAO/MetodesDAO.php';
         </nav>
     <!-- fi del menú -->
 
-        <h3 align="center" style="margin-top: 80px;">Registre d'usuaris</h3>
+
+
+       <h3 align="center" style="margin-top: 80px;">Registre d'usuaris</h3>
        <!-- form action buit "" perque les dades s'envien a la mateixa pàgina, aquesta -->
         <form action="" method="get">
             <table border="0" width="300" align="center">
@@ -82,6 +86,10 @@ include '../DAO/MetodesDAO.php';
                 </tr>
                 <tr>
                     <td>Contrasenya: </td>
+                    <td><input type="text" name="txtPas"></td>
+                </tr>
+                <tr>
+                    <td>Confirma la Contrasenya: </td>
                     <td><input type="text" name="txtPas"></td>
                 </tr>
                 <tr>
@@ -107,13 +115,50 @@ include '../DAO/MetodesDAO.php';
                 $confirmar = $metodes->registrarClient($objCli);
 
             // valido la resposta rebuda de $confirmar
-                if ($confirmar == 1)
+                if ($confirmar == 1) {
                     header ("Location: cataleg.php");
-                else
+                }
+                else {
                     echo "<h4 align=center>Registre no realitzat</h4>";
+                }
             }
         ?>
 
+<!-- Modal Bootstrap login-->
+         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
+         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="valida.php">
+                        <div class="modal-body" id="mostrar">
+
+                            <table border="0" align="center">
+                                <tr>
+                                    <td>Usuari: </td>
+                                    <td><input type="text" name="txtUsu"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td><input type="pasword" name="txtPas"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary">Tancar</button>
+                            <button class="btn btn-primary" onclick="submit()">Iniciar Sessió</button>
+                        </div>
+                        <!-- Registre després serà un hipervincle -->
+                            <h6 align="center"><a href="registre.php">No hi ets? Registra't</a></h6>
+                    </form>
+                </div>                  
+            </div>
+        </div>   
           <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

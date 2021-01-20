@@ -73,7 +73,27 @@ class MetodesDAO    {
     
         return $llista;
     
-        }      
+        }   
+        
+// Funció que em permet validar si un nou registre és usuari existent o usuari nou
+
+public function validarUsuari ($nom,$pas)  {
+
+    $con=new ConexioDB();
+    $conOK=$con->getConnexio();
+
+// faig la consulta a la BBDD amb una sentència SELECT 
+
+    $res=$conOK->prepare ("select * from clients where nom='$nom' and pas='$pas'");
+    $res->execute();
+
+    foreach ($res as $row) {
+        $llista = $row;
+    }
+
+    return $llista;
+
+    }   
 
 // Funció que em permet     rep de paràmetre un objecte $cli de la casse Client, per tant ja està rebent amb $cli tots els atributs de client
         // segurament aquí podré fer el create table per crear la taula que demana el Fonsi

@@ -1,4 +1,9 @@
+
+
+
 <?php
+
+session_start();
 
 // com que necessito el mètode validarUsuari:
 include '../DAO/MetodesDAO.php';
@@ -17,10 +22,13 @@ if (sizeof($llista) > 0)    {
     $_SESSION['acces'] = true;
     $_SESSION['codCli'] = $llista[0];
     $_SESSION['nom'] = $llista[1];
+
     header ("Location: cataleg.php");
 }
 else {
-    header ("Location: cataleg.php");
+    header ("Location: usNoTrobat.php");
+   
 }
 
 ?>
+ 

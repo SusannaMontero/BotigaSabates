@@ -14,29 +14,29 @@ include './MetodesDAO.php';
 // creo dues opcions, opcio1 per treballar amb la llista de productes i opcio2 per treballar amb la cistella, utilitzo variable de sessió
 // rep de detall.php 3 coses, a saber: 'opcio', 'id'i 'action'
 // REQUEST per recollir valors [la opció triada]
-// unset, ens neteja la llista que stà a la variable de tipus sessió
+// unset, ens neteja la llista que està a la variable de tipus sessió
 
 $opcio = $_REQUEST['opcio']; 
 
 switch ($opcio) {
     case 1:
-        //netejo
+        // netejo
         unset ($_SESSION['llista']);
 
-        //a l'instanciar la classe MetodesDAO i crear objMetode, aquest podrà fer servir tots els mètodes de la classe MetodesDAO
-        //instancio
+        // a l'instanciar la classe MetodesDAO i crear objMetode, aquest podrà fer servir tots els mètodes de la classe MetodesDAO
+        // instancio
         $objMetode = new MetodesDAO ();
 
-        //cridant a llistarProductes portem tota la llista i la guardem a llista
-        //crido mètode
-        $llista=$objMetode->llistarProductes();
+        // cridant a llistarProductes portem tota la llista i la guardem a llista
+        // crido mètode
+        $llista = $objMetode->llistarProductes();
 
-        //necessito que la llista es mantingui operativa mentre duri la sessió de l'usuari, per això la variable llista omple la varialbe SESSION i es mantingui activa i amb dades
-        //guardo llista a sessió
+        // necessito que la llista es mantingui operativa mentre duri la sessió de l'usuari, per això la variable llista omple la varialbe SESSION i es mantingui activa i amb dades
+        // guardo llista a sessió
         $_SESSION['llista'] = $llista;
 
-        //em ridercciono amb un location cap a la carpeta Vista on tinc el catàleg, això sempre que sigui la opcio1 del switch
-        //redirecciono a catàleg
+        // em ridercciono amb un location cap a la carpeta Vista on tinc el catàleg, això sempre que sigui la opcio1 del switch
+        // redirecciono a catàleg
         header ("Location: ../VISTESCLIENT/Cataleg.php");
         break;
 
@@ -73,12 +73,12 @@ switch ($opcio) {
                 $quantitat=$_REQUEST['txtQuantitat'];
                 /* if la cistella no ariba buida serà la variable de sessió cistella amb un id concret + igual a la quantitat que rep (se li afegirà o sumarà), +=(acumulador)
                     creo una variable de sessió cistella per cada producte que afegeixo a la cistella, així després per eliminar un producte em serà més fàcil*/
-                if (isset($_SESSION['cistella'][$id]))
+                if (isset($_SESSION['cistella'][$id]))  {
                     $_SESSION['cistella'][$id]+=$quantitat;
-
-                else
+                }
+                else    {
                     $_SESSION['cistella'][$id]=$quantitat;
-
+                }
                 break;
 
             case 'eliminar': 
@@ -87,8 +87,9 @@ switch ($opcio) {
                 if (isset ($_SESSION['cistella'][$id]))   {
                     $_SESSION['cistella'][$id] -- ;
                     //però
-                    if ($_SESSION['cistella'][$id] == 0)
+                    if ($_SESSION['cistella'][$id] == 0)    {
                         unset ($_SESSION['cistella'][$id]);
+                    }
                 }
 
                 break;

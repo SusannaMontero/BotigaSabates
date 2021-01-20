@@ -56,7 +56,6 @@ foreach ($llista as $row) {
                 </tr>
                 <tr>
                     <th align = "right" colspan="2">
-                        <button type="button" class="btn btn-secondary">Tancar</button>
                         <!-- important que aquest botó tingui l'event onclick per enviar el producte sel.leccionat a la cistella, si no el form action no s'enviarà -->
                         <button type="button" class="btn btn-primary" onclick="submit()">Agregar a la Cistella</button>
                     </th>
