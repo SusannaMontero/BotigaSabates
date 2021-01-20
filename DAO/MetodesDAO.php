@@ -5,6 +5,7 @@ huaré de fer servir la connexió i la tinc a una altra carpeta el primer que fa
 que surto de carpeta DAO i vaig a carpeta CON_BBDD*/
 
 include '../CON_BBDD/ConexioDB.php';
+include '../CLASSESREGISTRE/Client.php';
 
 class MetodesDAO    {
 
@@ -39,19 +40,70 @@ class MetodesDAO    {
     // aquesta funció la crido a la pàgina de detall
     public function llistarProductesCod ($cod)  {
 
-            $con=new ConexioDB();
-            $conOK=$con->getConnexio();
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
     
-        // faig la consulta a la BBDD amb una sentència SELECT però aquí afegeixo el where per seleccionar segons el codi de producte
+    // faig la consulta a la BBDD amb una sentència SELECT però aquí afegeixo el where per seleccionar segons el codi de producte
 
-            $res=$conOK->prepare ("select * from productes where codPro = $cod");
-            $res->execute();
+        $res=$conOK->prepare ("select * from productes where codPro = $cod");
+        $res->execute();
     
-            foreach ($res as $row) {
-                $llista[] = $row;
-            }
-    
-            return $llista;
-    
+        foreach ($res as $row) {
+            $llista[] = $row;
         }
+    
+        return $llista;
+    
+    }
+
+// Funcio que em permet validar a l'usuari, la creo abans de crear l'arxiu de validació
+    public function validarUsuari ($nom,$pas)  {
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+    
+    // faig la consulta a la BBDD amb una sentència SELECT 
+
+        $res=$conOK->prepare ("select * from clients where nom='$nom' and pas='$pas'");
+        $res->execute();
+    
+        foreach ($res as $row) {
+            $llista = $row;
+        }
+    
+        return $llista;
+    
+        }   
+        
+// Funció que em permet validar si un nou registre és usuari existent o usuari nou
+
+public function validarUsuari ($nom,$pas)  {
+
+    $con=new ConexioDB();
+    $conOK=$con->getConnexio();
+
+// faig la consulta a la BBDD amb una sentència SELECT 
+
+    $res=$conOK->prepare ("select * from clients where nom='$nom' and pas='$pas'");
+    $res->execute();
+
+    foreach ($res as $row) {
+        $llista = $row;
+    }
+
+    return $llista;
+
+    }   
+
+// Funció que em permet     rep de paràmetre un objecte $cli de la casse Client, per tant ja està rebent amb $cli tots els atributs de client
+        // segurament aquí podré fer el create table per crear la taula que demana el Fonsi
+    public function registrarClient (Client $cli)  {
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+        $res=$conOK->prepare ("INSERT INTO clients values (0,'$cli->nom', '$cli->mail', '$cli->pas')");
+        $confirmar = $res->execute();
+        return $confirmar;
+        
+        }              
 }

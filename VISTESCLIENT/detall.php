@@ -18,7 +18,7 @@ $objMetodes = new MetodesDAO();
 
 // 5. Crido dsd objMetodes al seu mètode llistarProductesCod($cod) que ve de MetodesDao.php
 
-$llista = $objMetodes -> llistarProductesCod($cod);
+$llista = $objMetodes->llistarProductesCod($cod);
 
 // 6. Enmagatzemo els detalls dels productes que tinc a la BBDD a les següents variables i amb un foreach recorro l'array per poder-lo imprimir correctament
 
@@ -37,7 +37,9 @@ foreach ($llista as $row) {
         <title></title>
     </head>
     <body>
-        <form>
+    <!-- envio el formulari cap a BotigaDAO pk és on recullo els paràmetres segons els quals vaig una opció o una altra del switch, i aleshores Botiga.DAO recull els valors, 
+                crea la cistella i es dirigeix cap a VISTAS cistella.php per poder visualitzar les dades que s'han enmagatzemat en les variables d tipus sessió -->
+        <form action="../DAO/botigaDAO.php">
             <table border = "0">
                 <tr> 
                     <th rowspan="4"><img src="../IMATGES/<?php echo $img; ?>" width="200" height="170"></th>
@@ -53,12 +55,16 @@ foreach ($llista as $row) {
                     <td align = "right">Quantitat: <input type="number" min="1" max="10" value="1" name="txtQuantitat"></td>
                 </tr>
                 <tr>
-                    <th align = "right">
-                        <button type="button" class="btn btn-secondary">Tancar</button>
-                        <button type="button" class="btn btn-primary">Agregar al Carret</button>
+                    <th align = "right" colspan="2">
+                        <!-- important que aquest botó tingui l'event onclick per enviar el producte sel.leccionat a la cistella, si no el form action no s'enviarà -->
+                        <button type="button" class="btn btn-primary" onclick="submit()">Agregar a la Cistella</button>
                     </th>
                 </tr>
             </table>
+<!-- abans de tancar el form enviem els paràmetres amb un input ocult a Botiga.DAO, primer el 'cod', segon l'acció d¡agregar i tercer la opció pel switch que sigui la 2 -->
+                <input type="hidden" name="id" value="<?php echo $cod; ?>">
+                <input type="hidden" name="action" value="agregar">
+                <input type="hidden" name="opcio" value="2">
         </form>
     </body>
 </html>
