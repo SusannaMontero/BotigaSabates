@@ -27,6 +27,9 @@ class MetodesDAO    {
             // executem el select i el resultat el deso a res
         $res->execute();
 
+        // tanco la connexió
+        $conOK = null;
+
             // guardo a l'array descomponent per files(row)
         foreach ($res as $row) {
             $llista[] = $row;
@@ -47,6 +50,10 @@ class MetodesDAO    {
 
         $res=$conOK->prepare ("select * from productes where codPro = $cod");
         $res->execute();
+
+        // tanco la connexió
+        $conOK = null;
+
     
         foreach ($res as $row) {
             $llista[] = $row;
@@ -66,6 +73,9 @@ class MetodesDAO    {
 
         $res=$conOK->prepare ("select * from clients where nom='$nom' and pas='$pas'");
         $res->execute();
+
+        // tanco la connexió
+        $conOK = null;
     
         foreach ($res as $row) {
             $llista = $row;
@@ -83,6 +93,8 @@ class MetodesDAO    {
         $conOK=$con->getConnexio();
         $res=$conOK->prepare ("INSERT INTO clients values (0,'$cli->nom', '$cli->mail', '$cli->pas')");
         $confirmar = $res->execute();
+        // tanco la connexió
+        $conOK = null;
         return $confirmar;
         
         }              

@@ -1,33 +1,26 @@
-
-
-
 <?php
 
 
 // com que necessito el mètode validarUsuari:
-include '../DAO/MetodesDAO.php';
+include '../DAO/MetodesAdmin.php';
 
-$usu = $_REQUEST['txtUsu'];
-$pas = $_REQUEST['txtPas'];
+$usu = $_REQUEST['txtNomAdmin'];
+$pas = $_REQUEST['txtPasAdmin'];
 
 // instancio la Classe MetodesDao.php, creo un nou objecte i crido al mètode validarUsuari
-$objMetodes = new MetodesDAO();
-$llista = $objMetodes->validarUsuari($usu, $pas);
+$objMetodes = new MetodesAdmin();
+$llista = $objMetodes->validarUsuariAdmin($usu, $pas);
 
 // vaig a verificar quants elements té aquesta $llista amb sizeof, a continuació creo la variable de sessió usuari i accés, la variable amb totes les dades de l'usuari que està accedint
 
 if (sizeof($llista) > 0)    {
     session_start();
-    $_SESSION['acces'] = true;
-    $_SESSION['codCli'] = $llista[0];
-    $_SESSION['nom'] = $llista[1];
-
-    header ("Location: cataleg.php");
+    $_SESSION['accesAdmin'] = true;
+    header ("Location: productes.php");
 }
 else {
-    header ("Location: usNoTrobat.php");
+    header ("Location: login.php?error=Usuari incorrecte!!");
    
 }
 
-?>
- 
+?> 
