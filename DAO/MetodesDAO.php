@@ -71,7 +71,7 @@ class MetodesDAO    {
     
     // faig la consulta a la BBDD amb una sentència SELECT 
 
-        $res=$conOK->prepare ("select * from clients where nom='$nom' and pas='$pas'");
+        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$nom' AND pas='$pas'");
         $res->execute();
 
         // tanco la connexió

@@ -51,7 +51,7 @@ class MetodesAdmin  {
     // Mètodes per realitzar el mantniment de la BBDD
 
 // Funció que em permet desar un producte nou, rep com a paràmetre l'objecte producte de la Classe producte
-    public function desarProducte (Producte $pro)   {
+    public function desarProducteAdmin (Producte $pro)   {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
@@ -62,7 +62,7 @@ class MetodesAdmin  {
 
 
 // Funció que em permet modificar productes
-    public function modificarProducte (Producte $pro)   {
+    public function modificarProducteAdmin (Producte $pro)   {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
@@ -73,18 +73,31 @@ class MetodesAdmin  {
 
 
 // Funció que em permet eliminar productes
-    public function eliminarProducte($cod)  {
+    public function eliminarProducteAdmin($cod)  {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
         $res=$conOK->prepare ("DELETE FROM productes WHERE codPro=$cod");
         $res->execute();
         $conOK = null;
-
-
     }
 
 
+// Funció que em permet llistar Productes per Codi
+    public function llistarProductesCodAdmin($cod)  {
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+        $res=$conOK->prepare ("SELECT FROM productes WHERE codPro=$cod");
+        $res->execute();
+        $conOK = null;
+
+        foreach ($res as $row)  {
+            $llista[] = $row;
+        }
+
+        return $llista;
+    }
     
 
 

@@ -1,9 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
+<!-- En aquest document hi ha la VistaClient que veurà l'Administradora quan vulgui modificar, crear o eliminar productes -->
 
-<?php 
-  include '../DAO/MetodesAdmin.php';
+<?php
+
+include '../DAO/MetodesAdmin.php';
+
+// rebo la opció sigui 1 o 2 en funció del que em faci falta
+
+$opcio = $_REQUEST['opcio'];
+
+switch  ($opcio)    {
+    case 1:
+        $cod = "";
+        $desc = "";
+        $preu = "";
+        $stock = "";
+        $estat = "";
+        $detall = "";
+        $categ = "";
+        break;
+
+    case 2:
+       $cod = $_REQUEST['cod'];
+        $objMetodes = new MetodesAdmin();
+        $llista = $objMetodes->llistarProductesCodAdmin($cod);
+        $cod = $llista[0];
+        $desc = $llista[1];
+        $preu = $llista[2];
+        $stock = $llista[3];
+        $estat = $llista[4];
+        $detall = $llista[5];
+        $categ = $llista[7];
+        break;
+    default:
+        break;
+}
 
 ?>
+
+<!-- formulari per manteniment, el cridarà ADMIN/productes.php -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -85,43 +120,57 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-        <!-- mostro el llistat de productes al dashboard de l'admin -->
-        <h3 align="center">Llistat de Productes</h3>
-        <table class="table">
-          <tr>
-              <th>Codi</th><th>Descripció</th><th>Preu</th><th>Stock</th><th>Estat</th><th>Imatge</th><th>Categoria</th><th>Editar</th>
-          </tr>
-
-        <?php 
-            $metodes = new MetodesAdmin();
-            $llista = $metodes->llistarProductesAdmin();
-
-            foreach ($llista as $row) {
-              ?>
-
-              <tr>
-                  <td><?php echo $row[0]?></td>  
-                  <td><?php echo $row[1]?></td>
-                  <td><?php echo $row[2]?></td>
-                  <td><?php echo $row[3]?></td>
-                  <td><?php echo $row[4]?></td>
-                  <td><img src="../IMATGES/ <?php echo $row[6]?>" width="30" height="30"></td>
-                  <td><?php echo $row[7]?></td>
-                  <td>
-                      <a href="formulari.php?opcio=2&cod=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a>
-                      <a href="" class="btn btn-danger" style="color:white;">Eliminar</a>
-                  </td>
-              </tr>
-
-            <?php
-            } 
-        ?>
-
+        <h3 align="center" style="margin-top: 50px">Productes</h3>
+    <form enctype="multipart/form-data" action="manteniment.php" method="POST">
+        <table border="0"  align="center" width="400">
+            <tr>
+                <td>Codi: </td>
+                <td><input type="text" name="txtCod" value="<?php echo $cod; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"
+                readonly="readonly"></td>
+            </tr>
+            <tr>
+                <td>Descripció: </td>
+                <td><input type="text" name="txtDesc" value="<?php echo $desc; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Preu: </td>
+                <td><input type="text" name="txtPreu" value="<?php echo $preu; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Quantitat: </td>
+                <td><input type="text" name="txtQuantitat" value="<?php echo $stock; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Estat: </td>
+                <td><input type="text" name="txtEstat" value="<?php echo $estat; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Detall: </td>
+                <td><input type="text" name="txtDetall" width="100" rows="3" 
+                class="form-control input-sm" style="margin-top: 5px;"><?php echo $detall; ?></textarea></td>
+            </tr>
+            <tr>
+                <td>Imatge:  </td>
+                <td><input  name="arxiu" type="file" /></td>
+            </tr>
+            <tr>
+                <td>Categoria: </td>
+                <td><input type="text" name="txtCateg" value="<?php echo $categ; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr style="margin-top: 10px;">
+                <th><a href="productes.php" class="btn btn-secondary" data-dismiss="modal">Tornar</a></th>
+                <th><input type="submit" value="Desar" class="btn btn-primary" name="btnDesar"/></th>
+            </tr>
+            <input type="hidden" value="<?php echo $opcio;?>" class="btn btn-primary" name="opcio"/>
         </table>
+    </form>
 
-        <h3 align="center">
-            <a href="formulari.php?opcio=1&cod=0" class="btn btn-primary">Afegir Nous Productes</a>
-      
     </main>
   </div>
 </div>
@@ -130,4 +179,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
         <script src="dashboard.js"></script></body>
+</html>
+
+    </body>
 </html>
