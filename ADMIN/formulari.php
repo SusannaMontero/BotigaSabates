@@ -22,6 +22,7 @@ switch  ($opcio)    {
 
     case 2:
        $cod = $_REQUEST['cod'];
+       echo $cod;
         $objMetodes = new MetodesAdmin();
         $llista = $objMetodes->llistarProductesCodAdmin($cod);
         $cod = $llista[0];
@@ -151,7 +152,7 @@ switch  ($opcio)    {
             </tr>
             <tr>
                 <td>Detall: </td>
-                <td><input type="text" name="txtDetall" width="100" rows="3" 
+                <td><textarea name="txtDetall" width="100" rows="3" 
                 class="form-control input-sm" style="margin-top: 5px;"><?php echo $detall; ?></textarea></td>
             </tr>
             <tr>

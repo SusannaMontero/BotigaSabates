@@ -88,14 +88,14 @@ class MetodesAdmin  {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
-        $res=$conOK->prepare ("SELECT FROM productes WHERE codPro=$cod");
+        $res=$conOK->prepare ("SELECT * FROM productes WHERE codPro=$cod");
         $res->execute();
         $conOK = null;
 
         foreach ($res as $row)  {
-            $llista[] = $row;
+            $llista = $row;
         }
-
+        
         return $llista;
     }
     

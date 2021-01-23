@@ -108,7 +108,7 @@
                   <td><img src="../IMATGES/ <?php echo $row[6]?>" width="30" height="30"></td>
                   <td><?php echo $row[7]?></td>
                   <td>
-                      <a href="formulari.php?opcio=2&cod=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a>
+                      <a href="formulari.php?opcio=2&cod=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a> ||
                       <a href="" class="btn btn-danger" style="color:white;">Eliminar</a>
                   </td>
               </tr>

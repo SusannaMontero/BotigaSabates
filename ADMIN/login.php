@@ -37,7 +37,7 @@
             echo $_REQUEST['error'];
         }
         ?> </h2>
-        <img class="mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <img class="mb-4" src="../IMATGES/descarga.jpg" alt="" width="110" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Si us plau entra</h1>
 
         <label for="inputName" class="sr-only">Nom Admin</label>
