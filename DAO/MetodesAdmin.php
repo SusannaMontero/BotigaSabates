@@ -100,6 +100,22 @@ class MetodesAdmin  {
     }
     
 
+// Funció que em permet llistar clients    
+    public function llistarClients()    {
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+        $res=$conOK->prepare ("SELECT * FROM clients");
+        $res->execute();
+        $conOK = null;
+
+        foreach ($res as $row)  {
+            $llista[] = $row;
+        }
+        
+        return $llista;
+    }
+    
 
 
 }

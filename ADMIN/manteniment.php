@@ -11,13 +11,13 @@ switch ($opcio) {
         // indico on vull que es desi la nova imatge
         $target_path = "../IMATGES/";
         // trec el nom de l'arxiu
-            $target_path = $target_path . basename( $_FILES['archivo']['name']);
+            $target_path = $target_path . basename( $_FILES['arxiu']['name']);
         // ho pujo al servidor
-            move_uploaded_file($_FILES['archivo']['tmp_name'], $target_path);
+            move_uploaded_file($_FILES['arxiu']['tmp_name'], $target_path);
         // deso el nom de la imatge per desar-ho a la BBDD
-            $img=basename( $_FILES['archivo']['name']);
+            $imatge=basename( $_FILES['arxiu']['name']);
 
-        $objPro = new Producte(0, $_REQUEST['txtDesc'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['selectEstat'], $_REQUEST['txtDetall'], $img);
+        $objPro = new Producte(0, $_REQUEST['txtDesc'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['selectDetall'], $imatge, $_categ['txtCateg']);
 
         $metodes = new MetodesAdmin();
         $metodes->desarProducteAdmin($objPro);
@@ -30,11 +30,11 @@ switch ($opcio) {
     // faig pràcticament el mateix pk si vull modificar la imatge repeteixo el procès del case 2
     case 2:
         $target_path = "../IMATGES/";
-            $target_path = $target_path . basename( $_FILES['archivo']['name']);
-            move_uploaded_file($_FILES['archivo']['tmp_name'], $target_path);
-            $img=basename( $_FILES['archivo']['name']);
+            $target_path = $target_path . basename( $_FILES['arxiu']['name']);
+           // move_uploaded_file($_FILES['arxiu']['tmp_name'], $target_path);
+            $imatge=basename( $_FILES['arxiu']['name']);
 
-            $objPro = new Producte($_REQUEST['txtCod'], $_REQUEST['txtDesc'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['selectEstat'], $_REQUEST['txtDetall'], $img);
+            $objPro = new Producte($_REQUEST['txtCod'], $_REQUEST['txtDesc'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['txtDetall'], $imatge, $_categ['txtCateg']);
 
         $metodes = new MetodesAdmin();
         $metodes->modificarProducteAdmin($objPro);

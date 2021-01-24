@@ -2,12 +2,12 @@
 
 <?php 
   include '../DAO/MetodesAdmin.php';
-
   session_start();
 
   if ($_SESSION['accesAdmin']<>TRUE) {
         header("Location: Login.php");
   }
+
 ?>
 <html lang="en">
   <head>
@@ -91,15 +91,15 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
         <!-- mostro el llistat de productes al dashboard de l'admin -->
-        <h3 align="center">Llistat de Productes</h3>
+        <h3 align="center">Llistat de Clients</h3>
         <table class="table">
           <tr>
-              <th>Codi</th><th>Descripció</th><th>Preu</th><th>Stock</th><th>Estat</th><th>Imatge</th><th>Categoria</th><th>Editar</th>
+              <th>Codi</th><th>Nom</th><th>Correu Electrònic</th><th>Contrasenya</th>
           </tr>
 
         <?php 
             $metodes = new MetodesAdmin();
-            $llista = $metodes->llistarProductesAdmin();
+            $llista = $metodes->llistarClients();
 
             foreach ($llista as $row) {
               ?>
@@ -109,13 +109,6 @@
                   <td><?php echo $row[1]?></td>
                   <td><?php echo $row[2]?></td>
                   <td><?php echo $row[3]?></td>
-                  <td><?php echo $row[4]?></td>
-                  <td><img src="../IMATGES/ <?php echo $row[6]?>" width="30" height="30"></td>
-                  <td><?php echo $row[7]?></td>
-                  <td>
-                      <a href="formulari.php?opcio=2&cod=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a> ||
-                      <a href="manteniment.php?opcio=3&cod=<?php echo $row[0]?>" class="btn btn-danger" style="color:white;">Eliminar</a>
-                  </td>
               </tr>
 
             <?php
@@ -124,9 +117,6 @@
 
         </table>
 
-        <h3 align="center">
-            <a href="formulari.php?opcio=1&cod=0" class="btn btn-primary">Afegir Nous Productes</a>
-      
     </main>
   </div>
 </div>
@@ -136,3 +126,4 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
         <script src="dashboard.js"></script></body>
 </html>
+

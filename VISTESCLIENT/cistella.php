@@ -4,6 +4,9 @@
 // per poder fer servir les variables de sessió
     session_start();
 
+  if ($_SESSION['acces']<>TRUE) {
+        header("Location: registre.php");
+  }
 // necessito un mètode que hi ha a DAO  així que: 
     include '../DAO/MetodesDAO.php';
 
@@ -42,7 +45,10 @@
                         <a class="nav-link" href="registre.php">Registre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">Inici de Sessió</a>
+                        <a class="nav-link" href="loginClient.php">Inici de Sessió</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../ADMIN/login.php">Admin</a>
                     </li>
                     
             <!-- en cas que la var de sessió no sigui buida o sigui true aleshores apareix el missatge de benvinguda + el nom de l'usuari -->
@@ -131,42 +137,6 @@
                 <button class="btn btn-secondary">Realitzar Pagament</button>
 
         </div>
-
-     <!-- Modal Bootstrap login-->
-         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
-         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="valida.php">
-                        <div class="modal-body" id="mostrar">
-
-                            <table border="0" align="center">
-                                <tr>
-                                    <td>Usuari: </td>
-                                    <td><input type="text" name="txtUsu"></td>
-                                </tr>
-                                <tr>
-                                    <td>Password</td>
-                                    <td><input type="pasword" name="txtPas"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary">Tancar</button>
-                            <button class="btn btn-primary" onclick="submit()">Iniciar Sessió</button>
-                        </div>
-                        <!-- Registre després serà un hipervincle -->
-                            <h6 align="center"><a href="registre.php">No hi ets? Registra't</a></h6>
-                    </form>
-                </div>                  
-            </div>
-        </div>   
 
             <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,6 +1,3 @@
-
-
-
 <?php
 
 
@@ -21,13 +18,11 @@ if (sizeof($llista) > 0)    {
     $_SESSION['acces'] = true;
     $_SESSION['codCli'] = $llista[0];
     $_SESSION['nom'] = $llista[1];
-
     header ("Location: cataleg.php");
 }
 else {
-    header ("Location: usNoTrobat.php");
+    header ("Location: loginClient.php?error=Usuari incorrecte!!");
    
 }
 
-?>
- 
+?> 

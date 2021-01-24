@@ -9,14 +9,6 @@ include '../DAO/MetodesDAO.php';
 
 ?>
 
-<html>
-    <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     
 <html lang="en">
   <head>
@@ -30,7 +22,7 @@ include '../DAO/MetodesDAO.php';
     <link rel="canonical" href="https://getbootstrap.com/docs/4.2/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-<link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
  
         <title></title>
@@ -58,7 +50,10 @@ include '../DAO/MetodesDAO.php';
                     ?>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">Inici de Sessió</a>
+                        <a class="nav-link" href="loginClient.php" >Inici de Sessió</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../ADMIN/login.php">Admin</a>
                     </li>
                     
                     
@@ -105,7 +100,7 @@ include '../DAO/MetodesDAO.php';
   <body class="text-center">
     <form class="form-signin" action="" method="get">
      
-        <img class="mb-4" src="../IMATGES/descarga.jpg" alt="" width="110" height="72">
+        <img class="mb-4" src="../IMATGES/imatgesCorporatives/descarga.jpg" alt="" width="110" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Registre</h1>
 
         <label for="inputName" class="sr-only"></label>
@@ -130,68 +125,51 @@ include '../DAO/MetodesDAO.php';
                 $mail = $_REQUEST['txtMail'];
                 $pas = $_REQUEST['txtPas'];
 
-            // creo un objecte te tipus Client, el primer que serà el codiClient com que és autoincrement no em fa falta inserir-ho, per això hi poso un 0
-                $objCli = new Client(0, $nom, $mail, $pas);
+                // valido si el nou usuari ja existeix en el moment del registre
 
-            // crido al mètode creant un nou objecte de la classe MetodesDAO
-                $metodes = new MetodesDAO();
+                // instancio la Classe MetodesDao.php, creo un nou objecte i crido al mètode validarUsuari
+                $objMetodes = new MetodesDAO();
+                $llista = $objMetodes->validarRegistre($nom, $pas);
 
-            // a MetodesDAO tinc la funció registrarClient que rep de paràmetre un objecte i retorna $confirmar que pot ser un o 0, així que aquí creo una variabe confirmar que serà igual a:
-                $confirmar = $metodes->registrarClient($objCli);
+                // vaig a verificar quants elements té aquesta $llista amb sizeof, a continuació creo la variable de sessió usuari i accés, la variable amb totes les dades de l'usuari que està accedint
 
-            // valido la resposta rebuda de $confirmar
-                if ($confirmar == 1) {
-                    header ("Location: cataleg.php");
+                if (sizeof($llista) > 0)    {
+                    
+                    $_SESSION['nom'] = $llista[1];
+                    $_SESSION['pas'] = $llista[3];
+                    header ("Location: registre.php?error=Usuari ja existeix");
                 }
                 else {
+                
+   
 
-                ?>
-                    <h2 align="center" class="text-danger">
+
+                // creo un objecte te tipus Client, el primer que serà el codiClient com que és autoincrement no em fa falta inserir-ho, per això hi poso un 0
+                    $objCli = new Client(0, $nom, $mail, $pas);
+
+                // crido al mètode creant un nou objecte de la classe MetodesDAO
+                    $metodes = new MetodesDAO();
+
+                // a MetodesDAO tinc la funció registrarClient que rep de paràmetre un objecte i retorna $confirmar que pot ser un o 0, així que aquí creo una variabe confirmar que serà igual a:
+                    $confirmar = $metodes->registrarClient($objCli);
                     
-                    <?php
-                         if (isset($_REQUEST['error']))     {
-                            echo $_REQUEST['error'];
-                 }
-                 ?> </h2>
-                 <?php
-                }
+                // valido la resposta rebuda de $confirmar
+                    
+                    $confirmar = new MetodesDAO();
+                   
+                    if ($confirmar == 1) {
+                        header ("Location: cataleg.php");
+                    }
+                    
+                        else {
+                                header ("Location: registre.php?error=Registre no realitzat!!");
+                        }
+                    
+                    
+                    }
             }
         ?>
 
-<!-- Modal Bootstrap login-->
-         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
-         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="valida.php">
-                        <div class="modal-body" id="mostrar">
-
-                            <table border="0" align="center">
-                                <tr>
-                                    <td>Usuari: </td>
-                                    <td><input type="text" name="txtUsu"></td>
-                                </tr>
-                                <tr>
-                                    <td>Password</td>
-                                    <td><input type="pasword" name="txtPas"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary">Tancar</button>
-                            <button class="btn btn-primary" onclick="submit()">Iniciar Sessió</button>
-                        </div>
-                        <!-- Registre després serà un hipervincle -->
-                            <h6 align="center"><a href="registre.php">No hi ets? Registra't</a></h6>
-                    </form>
-                </div>                  
-            </div>
         </div>   
           <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -48,7 +48,10 @@ $num
                         <a class="nav-link" href="registre.php">Registre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">Inici de Sessió</a>
+                        <a class="nav-link" href="loginClient.php">Inici de Sessió</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../ADMIN/login.php">Admin</a>
                     </li>
                     
             <!-- en cas que la var de sessió no sigui buida o sigui true aleshores apareix el missatge de benvinguda + el nom de l'usuari -->
