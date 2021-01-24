@@ -63,6 +63,31 @@ class MetodesDAO    {
     
     }
 
+// Funció per llistar catàleg segons la categoria seleccionada
+    public function llistarProductesCategoria ()  {
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+    // faig la consulta a la BBDD amb una sentència SELECT però aquí afegeixo el where per seleccionar segons el codi de producte
+
+        $res=$conOK->prepare ("select * from productes where categora = 'campera'");
+        $res->execute();
+
+        // tanco la connexió
+        $conOK = null;
+
+
+        foreach ($res as $row) {
+            $llistaDona[] = $row;
+        }
+
+        return $llistaDona;
+
+
+        
+    }
+
 // Funcio que em permet validar a l'usuari, la creo abans de crear l'arxiu de validació
     public function validarUsuari ($nom,$pas)  {
 

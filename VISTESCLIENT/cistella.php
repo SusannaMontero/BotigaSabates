@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
+
 // per poder fer servir les variables de sessió
     session_start();
 
   if ($_SESSION['acces']<>TRUE) {
         header("Location: registre.php");
   }
-// necessito un mètode que hi ha a DAO  així que: 
+// necessito un mètode que hi ha a DAO  així que:  
     include '../DAO/MetodesDAO.php';
 
 ?>
@@ -61,7 +63,7 @@
                         <a class="nav-link">Benvinguda/Benvingut <?php echo $_SESSION['nom']; ?></a>
                     </li>
                     <li class="nav-item">
-                        <a href="tancar.php" class="nav-link">Tancar Sessió</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#confirmarTancarModal">Tancar Sessió</a>
                     </li>
 
                     <?php
@@ -73,6 +75,32 @@
           </div>
         </nav>
     <!-- fi del menú -->
+
+    <!-- Modal Bootstrap confirmar logout-->
+         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
+         <div class="modal fade" id="confirmarTancarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    
+                    <div align="center">
+                        <div class="modal-body" id="mostrar">
+
+                            <h3  class="text-danger">Vols tancar la Sessió?</h3>
+                        </div>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                            <h6><a href="tancar.php">Tancar</a></h6>
+                            </li>
+                            <li class="list-inline-item">
+                                <h6 class="text-secondary"><a href="cataleg.php">Cancelar</a></h6>
+                            </li>
+                        </ul>
+                    </div>   
+                    
+                </div>                  
+            </div>
+        </div>
+
 
 
         <div class="container">
@@ -113,7 +141,7 @@
                     <td><?php echo $preu; ?></td>
                 <!-- posem href per anar al switch amb la opció 2 i la opció de restar productes i li he d'enviar l'id del producte que ha de restar, l'id es troba a un php amb la variable id
                     poso & per concatenar tot el que he d'enviar-->
-                    <td><?php echo $quantitat; ?><a href="../DAO/botigaDAO.php?id=<?php echo $id ?>$action=eliminar" class="btn-light">&nbsp - Menys</a></td>
+                    <td><?php echo $quantitat; ?><a href="../DAO/botigaDAO.php?id=<?php echo $id ?>opcio=2&action=eliminar" class="btn-light">&nbsp - Menys</a></td>
                     <td><?php echo $cost; ?></td>
                 </tr>
 

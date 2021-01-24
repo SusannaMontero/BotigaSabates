@@ -85,9 +85,9 @@ switch ($opcio) {
                 /* si la variable de sessió cistella arriba plena li resto 1 amb --, si anem treient productes i queda = 0 aleshores elimino la variable 
                     de sessió que s'ha creat per aquell producte */
                 if (isset ($_SESSION['cistella'][$id]))   {
-                    $_SESSION['cistella'][$id] -- ;
+                    $_SESSION['cistella'][$id] -1;
                     //però
-                    if ($_SESSION['cistella'][$id] == 0)    {
+                    if ($_SESSION['cistella'][$id]==0)    {
                         unset ($_SESSION['cistella'][$id]);
                     }
                 }

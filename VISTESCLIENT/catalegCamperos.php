@@ -37,6 +37,9 @@ $num
                     <li class="nav-item">
                         <a class="nav-link" href="cistella.php">Cistella</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../DAO/botigaDAO.php?opcio=1">Botiga</a>
+                    </li>
     <!-- Inici de sessió o Login -->
             <!-- valido sessió, de tal manera que si var de sessió 'acces' és buida o diferent de true apareixerà el registre -->
                     <?php
@@ -78,7 +81,7 @@ $num
     <!-- fi del menú -->
 
     <!-- inici carroussel -->
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                      <img src="../IMATGES/carroussel/inici.jpg" class="d-block w-100" width="180" height="600" alt="...">
@@ -111,11 +114,13 @@ $num
 
     
         <div class="container-fluid">
-                    <h2 align="center" style="margin-top: 80px;">CATÀLEG DE PRODUCTES</h2>
+                    <h2 align="center" style="margin-top: 80px;">CATÀLEG D'HOME</h2>
             <table border="0" width="700" align="center" class="table">
                 <tr align="center">
 
             <?php
+
+            
                     foreach ($llista as $registre)   {
                         if(($num==3)) {
                             echo "<tr align=center>";
@@ -123,11 +128,13 @@ $num
                         }else{
                             $num++;
                         }
+                        if($registre[7]=='home')    {
                     ?>
                 <th><img src="../IMATGES/<?php echo $registre[6]?>" width="180" height="180"><br><br>
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick="enviar(<?php echo $registre[0];?>)">Veure</button></th>
                 
                 <?php
+                        }
                 }  
                 ?>  
             </table>

@@ -57,7 +57,7 @@
                         <a class="nav-link">Benvinguda/Benvingut <?php echo $_SESSION['nom']; ?></a>
                     </li>
                     <li class="nav-item">
-                        <a href="tancar.php" class="nav-link">Tancar Sessió</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#confirmarTancarModal">Tancar Sessió</a>
                     </li>
 
                     <?php
@@ -69,6 +69,32 @@
           </div>
         </nav>
     <!-- fi del menú -->
+
+    <!-- Modal Bootstrap confirmar logout-->
+         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
+         <div class="modal fade" id="confirmarTancarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    
+                    <div align="center">
+                        <div class="modal-body" id="mostrar">
+
+                            <h3  class="text-danger">Vols tancar la Sessió?</h3>
+                        </div>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                            <h6><a href="tancar.php">Tancar</a></h6>
+                            </li>
+                            <li class="list-inline-item">
+                                <h6 class="text-secondary"><a href="cataleg.php">Cancelar</a></h6>
+                            </li>
+                        </ul>
+                    </div>   
+                    
+                </div>                  
+            </div>
+        </div>
+
 
     <style>
       .bd-placeholder-img {
