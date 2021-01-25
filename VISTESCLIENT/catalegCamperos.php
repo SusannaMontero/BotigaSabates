@@ -86,6 +86,7 @@ $num
                 <div class="carousel-item active">
                      <img src="../IMATGES/carroussel/inici.jpg" class="d-block w-100" width="180" height="600" alt="...">
                      <div class="carousel-caption d-none d-md-block">
+                     <h1><a href="cataleg.php">BOTIGA</a></h1>
                     </div>
                 </div>
                 <div class="carousel-item">

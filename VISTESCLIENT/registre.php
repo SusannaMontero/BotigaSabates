@@ -150,7 +150,7 @@ include '../DAO/MetodesDAO.php';
                 $nom = $_REQUEST['txtNom'];
                 $mail = $_REQUEST['txtMail'];
                 $pas = $_REQUEST['txtPas'];
-
+    
                 // valido si el nou usuari ja existeix en el moment del registre
 
                 // instancio la Classe MetodesDao.php, creo un nou objecte i crido al mètode validarUsuari
@@ -180,10 +180,11 @@ include '../DAO/MetodesDAO.php';
                     $confirmar = $metodes->registrarClient($objCli);
                     
                 // valido la resposta rebuda de $confirmar
-                    
+                   
                     $confirmar = new MetodesDAO();
                    
                     if ($confirmar == 1) {
+                        
                         header ("Location: loginClient.php");
                     }
                     
@@ -191,9 +192,13 @@ include '../DAO/MetodesDAO.php';
                                 header ("Location: registre.php?error=Registre no realitzat!!");
                         }
                     
-                    
-                    }
+                        
+                    }     
+                           
             }
+
+           // $objTaula = new MetodesDao();
+            //$taula = $objTaula->createTable(); 
         ?>
 
         </div>   

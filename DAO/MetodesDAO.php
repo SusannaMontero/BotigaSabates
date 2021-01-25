@@ -6,6 +6,8 @@ que surto de carpeta DAO i vaig a carpeta CON_BBDD*/
 
 include '../CON_BBDD/ConexioDB.php';
 include '../CLASSESREGISTRE/Client.php';
+include '../CLASSESREGISTRE/Comanda.php';
+include '../CLASSESREGISTRE/DetallComanda.php';
 
 class MetodesDAO    {
 
@@ -133,17 +135,82 @@ class MetodesDAO    {
     }   
 
 
-// Funció que em permet     rep de paràmetre un objecte $cli de la casse Client, per tant ja està rebent amb $cli tots els atributs de client
-        // segurament aquí podré fer el create table per crear la taula que demana el Fonsi
+// Funció que em permet     rep de paràmetre un objecte $cli de la casse Client, per tant ja està rebent amb $cli tots els atributs de client   
     public function registrarClient (Client $cli)  {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
         $res=$conOK->prepare ("INSERT INTO clients values (0,'$cli->nom', '$cli->mail', '$cli->pas')");
         $confirmar = $res->execute();
+
+                    
         // tanco la connexió
         $conOK = null;
         return $confirmar;
         
-        }              
+        } 
+        
+    public function createTable()   {
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+        $res=$conOK->prepare  ("CREATE TABLE lala ('numComanda' int(11) NOT NULL, 'codiPro' int(11) NOT NULL, 'can' int(11) NOT NULL)");
+        $res1->execute();
+        $confirmar = $res->execute();
+
+                    
+        // tanco la connexió
+        $conOK = null;
+
+    }
+        
+// Funció que em permet desar la nova comanda d'usuari
+    public function registrarComanda (Comanda $com)  {
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+        $res=$conOK->prepare ("INSERT INTO comanda values (0,'$com->codCli', '$com->data')");
+        $confirmar = $res->execute();
+
+        // tanco la connexió
+        $conOK = null;
+        return $confirmar;
+        
+        }   
+        
+// Funcio que em permet treure el num de Comanda per poder registrar posteriorment el detall de la comanda a la seva taula a la BBDD
+    public function numComanda ()  {
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+    // faig la consulta a la BBDD amb una sentència SELECT 
+
+        $res=$conOK->prepare ("SELECT max(numComanda) FROM comanda");
+        $res->execute();
+
+        // tanco la connexió
+        $conOK = null;
+
+        foreach ($res as $row) {
+            $numComanda= $row;
+        }
+
+        return $numComanda;
+
+        }   
+
+// Funció que em permet insertar la taula amb el detall de la nova comanda
+    public function insertarDetallComanda (DetallComanda $det)  {
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+        $res=$conOK->prepare ("INSERT INTO detallComanda values ($det->numComanda,'$det->codPro', '$det->can')");
+        $confirmar = $res->execute();
+
+        // tanco la connexió
+        $conOK = null;
+        return $confirmar;
+        
+        }   
+
 }

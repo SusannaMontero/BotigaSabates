@@ -162,7 +162,7 @@ error_reporting(E_ALL ^ E_NOTICE);
             <h6 align="center"></h6>
                 <a href="cataleg.php" class="btn btn-primary">Seguir comprant</a>
                 <a href="../DAO/botigaDAO.php?action=cistellaBuida&opcio=2" class="btn btn-primary">Buidar Cistella</a>
-                <button class="btn btn-secondary">Realitzar Pagament</button>
+                <button class="btn btn-secondary"><a href="../DAO/comandaDAO.php">Realitzar Comanda</a></button>
 
         </div>
 
