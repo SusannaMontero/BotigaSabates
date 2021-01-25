@@ -84,19 +84,19 @@ $num
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                     <img src="../IMATGES/carroussel/inici.jpg" class="d-block w-100" width="180" height="600" alt="...">
+                     <img src="../IMATGES/carroussel/inici.jpg" class="d-block w-100" width="180" height="800" alt="...">
                      <div class="carousel-caption d-none d-md-block">
                      <h1><a href="cataleg.php">BOTIGA</a></h1>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="../IMATGES/carroussel/camperes.jpg" class="d-block w-100" width="180" height="600" alt="...">
+                    <img src="../IMATGES/carroussel/camperes.jpg" class="d-block w-100" width="180" height="800" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                     <h1><a href="catalegCamperes.php">DONA</a></h1>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="../IMATGES/carroussel/camperos.jpg" class="d-block w-100" width="180" height="600" alt="...">
+                    <img src="../IMATGES/carroussel/camperos.jpg" class="d-block w-100" width="180" height="800" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                     <h1><a href="catalegCamperos.php">HOME</a></h1>
                     </div>

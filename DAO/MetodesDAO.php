@@ -153,9 +153,9 @@ class MetodesDAO    {
     public function createTable()   {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
-        $res=$conOK->prepare  ("CREATE TABLE lala ('numComanda' int(11) NOT NULL, 'codiPro' int(11) NOT NULL, 'can' int(11) NOT NULL)");
-        $res1->execute();
-        $confirmar = $res->execute();
+        $res=$conOK->prepare  ("CREATE TABLE lala ('numComanda' int(11) NOT NULL, 'codPro' int(11) NOT NULL, 'can' int(11) NOT NULL)");
+        $res->execute();
+        
 
                     
         // tanco la connexió

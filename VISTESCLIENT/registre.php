@@ -150,6 +150,9 @@ include '../DAO/MetodesDAO.php';
                 $nom = $_REQUEST['txtNom'];
                 $mail = $_REQUEST['txtMail'];
                 $pas = $_REQUEST['txtPas'];
+
+                        //$objTaula = new MetodesDao();
+                        //$taula = $objTaula->createTable(); 
     
                 // valido si el nou usuari ja existeix en el moment del registre
 
@@ -183,7 +186,8 @@ include '../DAO/MetodesDAO.php';
                    
                     $confirmar = new MetodesDAO();
                    
-                    if ($confirmar == 1) {
+                    if ($confirmar == 1) { 
+
                         
                         header ("Location: loginClient.php");
                     }
@@ -197,8 +201,7 @@ include '../DAO/MetodesDAO.php';
                            
             }
 
-           // $objTaula = new MetodesDao();
-            //$taula = $objTaula->createTable(); 
+            
         ?>
 
         </div>   
