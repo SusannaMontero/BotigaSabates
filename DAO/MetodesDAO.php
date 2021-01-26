@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL ^ E_NOTICE);
 /*creo una classe on hi hauràn tots els mètodes que faran falta, com que per qualsevol gestió que vulgui fer
 huaré de fer servir la connexió i la tinc a una altra carpeta el primer que faré serà crear un include on especifico
 que surto de carpeta DAO i vaig a carpeta CON_BBDD*/
@@ -8,6 +8,8 @@ include '../CON_BBDD/ConexioDB.php';
 include '../CLASSESREGISTRE/Client.php';
 include '../CLASSESREGISTRE/Comanda.php';
 include '../CLASSESREGISTRE/DetallComanda.php';
+
+
 
 class MetodesDAO    {
 
@@ -113,14 +115,13 @@ class MetodesDAO    {
         }   
 
     // Funcio que em permet validar el registre d'usuari 
-    public function validarRegistre ($nom, $pas)  {
+    public function validarRegistre (Client $cli)  {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
     
-    // faig la consulta a la BBDD amb una sentència SELECT 
-
-        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$nom' AND pas='$pas'");
+        // faig la consulta a la BBDD amb una sentència SELECT 
+        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$cli->nom' AND mail='$cli->mail' AND pas='$cli->pas'");
         $res->execute();
 
         // tanco la connexió
@@ -129,18 +130,47 @@ class MetodesDAO    {
         foreach ($res as $row) {
             $llista = $row;
         }
-    
-        return $llista;
+
+        if ($llista > 0)    {
+
+        ?>
+            <div align="center">
+                <div class="modal-body" id="mostrar">
+
+                    <h3  class="text-danger">Aquest nom d'Usuari<?php $cli->nom ?> ja existeix.</h3>
+                </div>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <h6>Provar amb un altre Nom/Nick o </h6>
+                    </li>
+                    <li class="list-inline-item">
+                        <h6 class="text-secondary"><a href="loginClient.php">Iniciar Sessió</a></h6>
+                    </li>
+                </ul>
+            </div> 
+        
+        <?php
+            if (isset($_REQUEST['error']))     {
+                echo $_REQUEST['error'];
+            }
+
+        }
+        else {
+           
+            return true;
+        }
+        
     
     }   
 
 
-// Funció que em permet     rep de paràmetre un objecte $cli de la casse Client, per tant ja està rebent amb $cli tots els atributs de client   
+// Funció que em permet  fer el registre d'un nou usuari,  rep de paràmetre un objecte $cli de la casse Client, per tant ja està rebent amb $cli tots els atributs de client   
     public function registrarClient (Client $cli)  {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
         $res=$conOK->prepare ("INSERT INTO clients values (0,'$cli->nom', '$cli->mail', '$cli->pas')");
+        
         $confirmar = $res->execute();
 
                     
@@ -148,14 +178,15 @@ class MetodesDAO    {
         $conOK = null;
         return $confirmar;
         
-        } 
-        
+    } 
+
+// Funcio que crea una taula nova anomenada com el Nick del nou usuari registrat        
     public function createTable()   {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
-        $res=$conOK->prepare  ("CREATE TABLE lala ('numComanda' int(11) NOT NULL, 'codiPro' int(11) NOT NULL, 'can' int(11) NOT NULL)");
-        $res1->execute();
-        $confirmar = $res->execute();
+        $res=$conOK->prepare  ("CREATE TABLE lila('numComanda' int(11) NOT NULL, 'codPro' int(11) NOT NULL, 'can' int(11) NOT NULL)");
+        $res->execute();
+        
 
                     
         // tanco la connexió

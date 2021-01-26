@@ -22,7 +22,7 @@
     <!-- Menu Bootstrap -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div class="container">
-             <span class="navbar-text">Botiga de Sabates Su</span>
+          <a class="nav-link" href="../DAO/botigaDAO.php?opcio=1">Botiga de Sabates Su</a>
                 <span class="navbar-toggle-icon"></span>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
@@ -39,6 +39,9 @@
 
                     ?>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="registre.php">Registre</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="loginClient.php" >Inici de Sessió</a>
                     </li>
@@ -71,7 +74,7 @@
     <!-- fi del menú -->
 
     <!-- Modal Bootstrap confirmar logout-->
-         <!-- a aquest modal login(id="loginModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
+         <!-- a aquest modal login(id="confirmarTancarModal) el cridarà l'inici de sessió de l'usuari que es troba al menú -->
          <div class="modal fade" id="confirmarTancarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

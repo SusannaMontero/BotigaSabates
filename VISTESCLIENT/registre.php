@@ -32,7 +32,7 @@ include '../DAO/MetodesDAO.php';
     <!-- Menu Bootstrap -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div class="container">
-             <span class="navbar-text">Botiga de Sabates Su</span>
+            <a class="nav-link" href="../DAO/botigaDAO.php?opcio=1">Botiga de Sabates Su</a>
                 <span class="navbar-toggle-icon"></span>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
@@ -152,53 +152,51 @@ include '../DAO/MetodesDAO.php';
                 $pas = $_REQUEST['txtPas'];
     
                 // valido si el nou usuari ja existeix en el moment del registre
-
-                // instancio la Classe MetodesDao.php, creo un nou objecte i crido al mètode validarUsuari
-                $objMetodes = new MetodesDAO();
-                $llista = $objMetodes->validarRegistre($nom, $pas);
-
-                // vaig a verificar quants elements té aquesta $llista amb sizeof, a continuació creo la variable de sessió usuari i accés, la variable amb totes les dades de l'usuari que està accedint
-
-                if (sizeof($llista) > 0)    {
-                    
-                    $_SESSION['nom'] = $llista[1];
-                    $_SESSION['pas'] = $llista[3];
-                    header ("Location: registre.php?error=Usuari ja existeix");
-                }
-                else {
-                
-   
-
-
                 // creo un objecte te tipus Client, el primer que serà el codiClient com que és autoincrement no em fa falta inserir-ho, per això hi poso un 0
                     $objCli = new Client(0, $nom, $mail, $pas);
 
                 // crido al mètode creant un nou objecte de la classe MetodesDAO
                     $metodes = new MetodesDAO();
 
-                // a MetodesDAO tinc la funció registrarClient que rep de paràmetre un objecte i retorna $confirmar que pot ser un o 0, així que aquí creo una variabe confirmar que serà igual a:
-                    $confirmar = $metodes->registrarClient($objCli);
+                    $validar = $metodes->validarRegistre($objCli);
                     
+                    if ($validar == true) {
+
+                // a MetodesDAO tinc la funció registrarClient que rep de paràmetre un objecte i retorna $confirmar que pot ser un o 0, així que aquí creo una variabe confirmar que serà igual a:
+                             $metodes = new MetodesDAO();
+                             $confirmar = $metodes->registrarClient($objCli);
+                            
                 // valido la resposta rebuda de $confirmar
                    
-                    $confirmar = new MetodesDAO();
-                   
-                    if ($confirmar == 1) {
-                        
-                        header ("Location: loginClient.php");
-                    }
-                    
-                        else {
-                                header ("Location: registre.php?error=Registre no realitzat!!");
-                        }
-                    
-                        
-                    }     
-                           
+                            if ($confirmar == 1) {
+//////////////////////////////////////////////////////////////////////////////////////////////
+                                $metodes = new MetodesDAO();
+                                $createTable = $metodes->createTable();
+///////////////////////////////////////////////////////////////////////////////////////////////
+                                ?>
+                                <div align="center">
+                                    <div class="modal-body" id="mostrar">
+
+                                        <h3  class="text-primary"><?php $cli->nom ?> Registre realitzat!</h3>
+                                    </div>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <h6>Accedeix a: </h6>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <h6 class="text-secondary"><a href="loginClient.php">Iniciar Sessió</a></h6>
+                                        </li>
+                                    </ul>
+                                </div> 
+                                
+                                <?php
+                                if (isset($_REQUEST['error']))     {
+                                    echo $_REQUEST['error'];
+                                }
+                            } 
+                    }          
             }
 
-           // $objTaula = new MetodesDao();
-            //$taula = $objTaula->createTable(); 
         ?>
 
         </div>   
