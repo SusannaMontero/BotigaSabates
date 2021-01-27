@@ -181,10 +181,16 @@ class MetodesDAO    {
     } 
 
 // Funcio que crea una taula nova anomenada com el Nick del nou usuari registrat        
-    public function createTable()   {
+    public function createTable(Client $cli)   {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
-        $res=$conOK->prepare  ("CREATE TABLE lila('numComanda' int(11) NOT NULL, 'codPro' int(11) NOT NULL, 'can' int(11) NOT NULL)");
+        $res=$conOK->prepare  ("CREATE TABLE $cli->nom
+        (numComanda int NOT NULL, 
+        codPro int NOT NULL, 
+        can int NOT NULL, 
+        FOREIGN KEY (numComanda) REFERENCES comanda (numComanda),
+        FOREIGN KEY (codPro) REFERENCES productes (codPro));");
+       
         $res->execute();
         
 

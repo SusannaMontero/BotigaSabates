@@ -171,7 +171,7 @@ include '../DAO/MetodesDAO.php';
                             if ($confirmar == 1) {
 //////////////////////////////////////////////////////////////////////////////////////////////
                                 $metodes = new MetodesDAO();
-                                $createTable = $metodes->createTable();
+                                $createTable = $metodes->createTable($objCli);
 ///////////////////////////////////////////////////////////////////////////////////////////////
                                 ?>
                                 <div align="center">
