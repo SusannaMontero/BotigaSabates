@@ -67,6 +67,7 @@ class MetodesDAO    {
     
     }
 
+    /*
 // Funció per llistar catàleg segons la categoria seleccionada
     public function llistarProductesCategoria ()  {
 
@@ -87,9 +88,27 @@ class MetodesDAO    {
         }
 
         return $llistaDona;
-
-
         
+    }*/
+
+// Funció que em permet llistar per preus els productes
+    public function ordenarPerPreu()    {
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+        $res=$conOK->prepare ("SELECT * FROM productes ORDER BY preu DESC");;
+        $res->execute();
+
+        // tanco la connexió
+        $conOK = null;
+
+        foreach ($res as $row) {
+            $llistaPreu[] = $row;
+        }
+
+        return $llistaPreu;
+
     }
 
 // Funcio que em permet validar a l'usuari, la creo abans de crear l'arxiu de validació
@@ -100,7 +119,7 @@ class MetodesDAO    {
     
     // faig la consulta a la BBDD amb una sentència SELECT 
 
-        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$nom' AND pas='$pas'");
+        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$nom' AND pas=sha('$pas')");
         $res->execute();
 
         // tanco la connexió
@@ -121,7 +140,7 @@ class MetodesDAO    {
         $conOK=$con->getConnexio();
     
         // faig la consulta a la BBDD amb una sentència SELECT 
-        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$cli->nom' AND mail='$cli->mail' AND pas='$cli->pas'");
+        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$cli->nom' AND mail='$cli->mail' AND pas=SHA('$cli->pas')");
         $res->execute();
 
         // tanco la connexió
@@ -169,7 +188,7 @@ class MetodesDAO    {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
-        $res=$conOK->prepare ("INSERT INTO clients values (0,'$cli->nom', '$cli->mail', '$cli->pas')");
+        $res=$conOK->prepare ("INSERT INTO clients values (0,'$cli->nom', '$cli->mail', SHA('$cli->pas'))");
         
         $confirmar = $res->execute();
 
@@ -199,6 +218,7 @@ class MetodesDAO    {
         $conOK = null;
 
     }
+
         
 // Funció que em permet desar la nova comanda d'usuari
     public function registrarComanda (Comanda $com)  {
@@ -236,12 +256,27 @@ class MetodesDAO    {
 
         }   
 
-// Funció que em permet insertar la taula amb el detall de la nova comanda
-    public function insertarDetallComanda (DetallComanda $det)  {
+//  Funció que em permet treure el codi de Client per obtenir el seu nom d'usuari i així poder insertar el detall de la comanda a la taula corresponent
+    public function nomTaula (Comanda $com) {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
-        $res=$conOK->prepare ("INSERT INTO detallComanda values ($det->numComanda,'$det->codPro', '$det->can')");
+
+        $res=$conOk->prepare ("SELECT 'nom' FROM 'clients' WHERE 'codCli'='$com->codCli'");
+        $nomTa=$res->execute();
+        $conOK=null;
+
+        return $nomTa;
+
+        }
+
+// Funció que em permet insertar la taula amb el detall de la nova comanda
+    public function insertarDetallComanda (DetallComanda $det)  {
+
+
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+        $res=$conOK->prepare ("INSERT INTO $det->nomTaula values ($det->numComanda,'$det->codPro', '$det->can')");
         $confirmar = $res->execute();
 
         // tanco la connexió

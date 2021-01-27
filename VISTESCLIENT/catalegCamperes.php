@@ -9,7 +9,7 @@ session_start();
 //porto la llista de productes
 
 $llista = $_SESSION['llista'];
-$num
+
 
 ?>
 
