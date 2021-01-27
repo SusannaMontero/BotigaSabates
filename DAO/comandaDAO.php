@@ -15,9 +15,13 @@ if(isset($_SESSION['cistella']))    {
 
     // recullo el numero de la darrera comanda
     $ultimoPed = $objMet->numComanda();
+    
+    // recullo nom de la taula on insertar el detall de la comanda
+    $objTaula = new MetodesDAO();
+    $nomTaula = $objTaula->nomTaula($objCom);
 
     foreach ($_SESSION['cistella'] as $id=>$x)  {
-        $objDetall = new DetallComanda($ultimoPed[0], $id, $x);
+        $objDetall = new DetallComanda($ultimoPed[0], $id, $x, $nomTaula);
         $objMet->insertarDetallComanda($objDetall);
     }
 
