@@ -119,7 +119,7 @@ class MetodesDAO    {
     
     // faig la consulta a la BBDD amb una sentència SELECT 
 
-        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$nom' AND pas=sha('$pas')");
+        $res=$conOK->prepare ("SELECT * FROM clients WHERE nom='$nom' AND pas=SHA('$pas')");
         $res->execute();
 
         // tanco la connexió
@@ -211,9 +211,7 @@ class MetodesDAO    {
         FOREIGN KEY (codPro) REFERENCES productes (codPro));");
        
         $res->execute();
-        
-
-                    
+                 
         // tanco la connexió
         $conOK = null;
 
