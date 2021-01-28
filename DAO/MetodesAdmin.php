@@ -66,7 +66,7 @@ class MetodesAdmin  {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
-        $res=$conOK->prepare ("UPDATE productes SET descripcio='$pro->des', preu='$pro->preu', stock='$pro->stock', estat'$pro->estat', detall'$pro->detall', imatge'$pro->imatge', categoria'$pro->categ' WHERE codPro=$pro->cod");
+        $res=$conOK->prepare ("UPDATE productes SET descripcio='$pro->desc', preu='$pro->preu', stock='$pro->stock', estat'$pro->estat', detall'$pro->detall', imatge'$pro->imatge', categoria'$pro->categ' WHERE codPro=$pro->cod");
         $res->execute();
         $conOK = null;
     }
@@ -101,7 +101,7 @@ class MetodesAdmin  {
     
 
 // Funció que em permet llistar clients    
-    public function llistarClients()    {
+    public function llistarClientsAdmin()    {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
@@ -116,6 +116,46 @@ class MetodesAdmin  {
         return $llista;
     }
     
+// Funció que em permet modificar clients
+    public function modificarClientsAdmin (Client $cli)   {
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+        $res=$conOK->prepare ("UPDATE clients SET nom='$cli->nom', mail='$cli->mail', pas='$cli->pas' WHERE codCli=$cli->codCli");
+        $res->execute();
+        $conOK = null;
+    }
+
+
+// Funció que em permet eliminar clients
+    public function eliminarClientsAdmin($codCli)  {
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+        $res=$conOK->prepare ("DELETE FROM clients WHERE codCli=$codCli");
+        $res->execute();
+        $conOK = null;
+
+        
+    }
+
+
+// Funció que em permet llistar clients  per codi  
+    public function llistarClientsCod($codCli)    {
+        $con=new ConexioDB();
+        $conOK=$con->getConnexio();
+
+        $res=$conOK->prepare ("SELECT * FROM clients WHERE codCli=$codCli");
+        $res->execute();
+        $conOK = null;
+
+        foreach ($res as $row)  {
+            $llista = $row;
+        }
+        
+        return $llista;
+    }
+
 
 
     

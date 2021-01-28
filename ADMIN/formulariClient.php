@@ -1,14 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
+<!-- En aquest document hi ha la VistaClient que veurà l'Administradora quan vulgui modificar, crear o eliminar productes -->
 
-<?php 
-  include '../DAO/MetodesAdmin.php';
-  session_start();
+<?php
 
-  if ($_SESSION['accesAdmin']<>TRUE) {
-        header("Location: login.php");
-  }
+include '../DAO/MetodesAdmin.php';
+
+// rebo la opció sigui 1 o 2 en funció del que em faci falta
+
+$opcio = $_REQUEST['opcio'];
+
+switch  ($opcio)    {
+    case 1:
+        $codCli = "";
+        $nom = "";
+        $mail = "";
+        $pas = "";
+        break;
+
+    case 2:
+       $codCli = $_REQUEST['codCli'];
+       echo $codCli;
+        $objMetodes = new MetodesAdmin();
+        $llista = $objMetodes->llistarClientsCod($codCli);
+        $codCli = $llista[0];
+        $nom = $llista[1];
+        $mail = $llista[2];
+        $pas = $llista[3];
+        break;
+    default:
+        break;
+}
 
 ?>
+
+<!-- formulari per manteniment, el cridarà ADMIN/clients.php -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -41,11 +66,11 @@
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="../VISTESCLIENT/cataleg.php">Botiga de Sabates Su</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Botiga de Sabates Su</a>
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="tancarSessioAdmin.php">Tancar</a>
+      <a class="nav-link" href="#">Sing out</a>
     </li>
   </ul>
 </nav>
@@ -62,7 +87,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="productes.php">
+            <a class="nav-link" href="#">
               <span data-feather="file"></span>
               Producte
             </a>
@@ -74,13 +99,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="clients.php">
+            <a class="nav-link" href="#">
               <span data-feather="users"></span>
               Clients
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="tancarSessioAdmin.php">
+            <a class="nav-link" href="#">
               <span data-feather="bar-chart-2"></span>
               Sortir
             </a>
@@ -90,40 +115,38 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-        <!-- mostro el llistat de productes al dashboard de l'admin -->
-        <h3 align="center">Llistat de Clients</h3>
-        <table class="table">
-          <tr>
-              <th>Codi</th><th>Nom</th><th>Correu Electrònic</th><th>Contrasenya</th>
-          </tr>
-
-        <?php 
-            $metodes = new MetodesAdmin();
-            $llista = $metodes->llistarClientsAdmin();
-
-            foreach ($llista as $row) {
-              ?>
-
-              <tr>
-                  <td><?php echo $row[0]?></td>  
-                  <td><?php echo $row[1]?></td>
-                  <td><?php echo $row[2]?></td>
-                  <td><?php echo $row[3]?></td>
-                  <td>
-                      <a href="formulariClient.php?opcio=2&cod=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a> ||
-                      <a href="mantenimentClients.php?opcio=3&cod=<?php echo $row[0]?>" class="btn btn-danger" style="color:white;">Eliminar</a>
-                  </td>
-              </tr>
-
-            <?php
-            } 
-        ?>
-
+        <h3 align="center" style="margin-top: 50px">Productes</h3>
+    <form enctype="multipart/form-data" action="mantenimentClients.php" method="POST">
+        <table border="0"  align="center" width="400">
+            <tr>
+                <td>Codi: </td>
+                <td><input type="text" name="txtCod" value="<?php echo $codCli; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"
+                readonly="readonly"></td>
+            </tr>
+            <tr>
+                <td>Nom: </td>
+                <td><input type="text" name="txtNom" value="<?php echo $nom; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Correu Electrònic: </td>
+                <td><input type="text" name="txtMail" value="<?php echo $mail; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Contrasenya: </td>
+                <td><input type="text" name="txtPas" value="<?php echo $pas; ?>"
+                class="form-control input-sm" style="margin-top: 5px;"></td>
+            </tr>
+            <tr style="margin-top: 10px;">
+                <th><a href="clients.php" class="btn btn-secondary" data-dismiss="modal">Tornar</a></th>
+                <th><input type="submit" value="Desar" class="btn btn-primary" name="btnDesar"/></th>
+            </tr>
+            <input type="hidden" value="<?php echo $opcio;?>" class="btn btn-primary" name="opcio"/>
         </table>
+    </form>
 
-        <h3 align="center">
-            <a href="formulariClient.php?opcio=1&cod=0" class="btn btn-primary">Afegir Nous Clients</a>
-      
     </main>
   </div>
 </div>
@@ -132,4 +155,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
         <script src="dashboard.js"></script></body>
+</html>
+
+    </body>
 </html>

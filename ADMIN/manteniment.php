@@ -34,7 +34,7 @@ switch ($opcio) {
            // move_uploaded_file($_FILES['arxiu']['tmp_name'], $target_path);
             $imatge=basename( $_FILES['arxiu']['name']);
 
-            $objPro = new Producte($_REQUEST['txtCod'], $_REQUEST['txtDesc'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['txtDetall'], $imatge, $_categ['txtCateg']);
+            $objPro = new Producte($_REQUEST['txtCod'], $_REQUEST['txtDes'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['txtDetall'], $imatge, $_categ['txtCateg']);
 
         $metodes = new MetodesAdmin();
         $metodes->modificarProducteAdmin($objPro);

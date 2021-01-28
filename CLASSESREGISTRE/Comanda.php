@@ -7,7 +7,7 @@ class Comanda  {
 
     function __construct($numComanda, $codCli, $data)   {
         $this->numComanda = $numComanda;
-        $this->codClient = $codCli;
+        $this->codCli = $codCli;
         $this->data = $data;
     }
 
@@ -29,11 +29,11 @@ class Comanda  {
         $this->numComanda = $numComanda;
     }
 
-    function setCodClient() {
+    function setCodCli($codCli) {
         $this->codCli = $codCli;
     }
 
-    function setData()  {
+    function setData($data)  {
         $this->data = $data;
     }
 }

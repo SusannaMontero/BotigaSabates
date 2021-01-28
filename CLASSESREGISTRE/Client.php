@@ -37,19 +37,19 @@ class Client    {
     }
 
     // set
-    function setCodCli()    {
+    function setCodCli($codCli)    {
         $this->codCli = $codCli;
     }
 
-    function setNom()   {
+    function setNom($nom)   {
         $this->nom = $nom;
     }
 
-    function setMail()  {
+    function setMail($mail)  {
         $this->mail = $mail;
     }
 
-    function setPas()   {
+    function setPas($pas)   {
         $this->pas = $pas;
     }
 

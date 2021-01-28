@@ -92,6 +92,9 @@
 
         <!-- mostro el llistat de productes al dashboard de l'admin -->
         <h3 align="center">Llistat de Productes</h3>
+        <div>
+           <button type=“submit” id=“export_data” name=‘export_data’ value=“Export to excel” class=“btn btn-info”>Exportar a Excel</button>
+        </div><br>
         <table class="table">
           <tr>
               <th>Codi</th><th>Descripció</th><th>Preu</th><th>Stock</th><th>Estat</th><th>Imatge</th><th>Categoria</th><th>Editar</th>

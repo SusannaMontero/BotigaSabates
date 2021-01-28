@@ -58,35 +58,35 @@ function getCateg()   {
 }
 
 // set
-function setCod()    {
+function setCod($cod)    {
     $this->cod = $cod;
 }
 
-function setDes()   {
-    $this->des = $des;
+function setDes($desc)   {
+    $this->des = $desc;
 }
 
-function setPreu()  {
+function setPreu($preu)  {
     $this->preu = $preu;
 }
 
-function setStock()   {
+function setStock($stock)   {
     $this->stock = $stock;
 }
 
-function setEstat()    {
+function setEstat($estat)    {
     $this->estat = $estat;
 }
 
-function setDetall()    {
-    $this->detall = $edetall;
+function setDetall($detall)    {
+    $this->detall = $detall;
 }
 
-function setImatge()    {
+function setImatge($imatge)    {
     $this->imatge = $imatge;
 }
 
-function setCateg()    {
+function setCateg($categ)    {
     $this->categ = $categ;
 }
 
