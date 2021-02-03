@@ -48,10 +48,10 @@
       <label>
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Generar XML per categories:</a>
     </label>
-    <label class="btn btn-secondary active">
+    <label class="btn  active">
       <a href="../EXPORTACIONS/generarXML.php">Dona</a>
     </label>
-    <label class="btn btn-secondary">
+    <label class="btn active">
       <a href="../EXPORTACIONS/generarXMLH.php">Home</a>
     </label>
   </div>
@@ -61,10 +61,10 @@
       <label>
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Generar EXCEL per categories:</a>
     </label>
-    <label class="btn btn-secondary active">
+    <label class="btn  active">
       <a href="../EXPORTACIONS/generarXML.php">Dona</a>
     </label>
-    <label class="btn btn-secondary">
+    <label class="btn active">
       <a href="../EXPORTACIONS/generarXMLH.php">Home</a>
     </label>
   </div>
