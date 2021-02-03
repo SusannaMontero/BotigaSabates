@@ -27,6 +27,7 @@ foreach ($llista as $row) {
     $preu = $row [2];
     $detall = $row [5];
     $img = $row [6];
+    $categoria = $row [7];
 }
 
 ?>

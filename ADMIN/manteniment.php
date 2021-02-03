@@ -17,7 +17,7 @@ switch ($opcio) {
         // deso el nom de la imatge per desar-ho a la BBDD
             $imatge=basename( $_FILES['arxiu']['name']);
 
-        $objPro = new Producte(0, $_REQUEST['txtDesc'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['selectDetall'], $imatge, $_categ['txtCateg']);
+        $objPro = new Producte(0, $_REQUEST['txtDesc'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['txtDetall'], $imatge, $_REQUEST['txtCateg']);
 
         $metodes = new MetodesAdmin();
         $metodes->desarProducteAdmin($objPro);
@@ -27,14 +27,14 @@ switch ($opcio) {
         break;
 
     // si és case 2 modifico un producte 
-    // faig pràcticament el mateix pk si vull modificar la imatge repeteixo el procès del case 2
+    // faig pràcticament el mateix pk si vull modificar la imatge repeteixo el procès del case 1
     case 2:
         $target_path = "../IMATGES/";
             $target_path = $target_path . basename( $_FILES['arxiu']['name']);
-           // move_uploaded_file($_FILES['arxiu']['tmp_name'], $target_path);
+            move_uploaded_file($_FILES['arxiu']['tmp_name'], $target_path);
             $imatge=basename( $_FILES['arxiu']['name']);
 
-            $objPro = new Producte($_REQUEST['txtCod'], $_REQUEST['txtDes'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['txtDetall'], $imatge, $_categ['txtCateg']);
+        $objPro = new Producte($_REQUEST['txtCod'], $_REQUEST['txtDes'], $_REQUEST['txtPreu'], $_REQUEST['txtQuantitat'], $_REQUEST['txtEstat'], $_REQUEST['txtDetall'], $imatge, $_categ['txtCateg']);
 
         $metodes = new MetodesAdmin();
         $metodes->modificarProducteAdmin($objPro);

@@ -76,7 +76,7 @@ switch  ($opcio)    {
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sing out</a>
+      <a class="nav-link" href="tancarSessioAdmin.php">Tancar</a>
     </li>
   </ul>
 </nav>
@@ -93,27 +93,21 @@ switch  ($opcio)    {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="productes.php">
               <span data-feather="file"></span>
               Producte
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="comandes.php">
               <span data-feather="shopping-cart"></span>
               Comandes
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="clients.php">
               <span data-feather="users"></span>
               Clients
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              Sortir
             </a>
           </li>
         </ul>

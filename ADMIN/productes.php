@@ -42,12 +42,39 @@
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="../VISTESCLIENT/cataleg.php">Botiga de Sabates Su</a>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  
+  <!-- botons generar XML per categories -->  
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Generar XML per categories:</a>
+    </label>
+    <label class="btn btn-secondary active">
+      <a href="../EXPORTACIONS/generarXML.php">Dona</a>
+    </label>
+    <label class="btn btn-secondary">
+      <a href="../EXPORTACIONS/generarXMLH.php">Home</a>
+    </label>
+  </div>
+  <!-- fi -->
+  <!-- generar EXCEL per categories -->
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Generar EXCEL per categories:</a>
+    </label>
+    <label class="btn btn-secondary active">
+      <a href="../EXPORTACIONS/generarXML.php">Dona</a>
+    </label>
+    <label class="btn btn-secondary">
+      <a href="../EXPORTACIONS/generarXMLH.php">Home</a>
+    </label>
+  </div>
+  <!-- fi -->
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="tancarSessioAdmin.php">Tancar</a>
     </li>
   </ul>
+
 </nav>
 
 <div class="container-fluid">
@@ -68,7 +95,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="comandes.php">
               <span data-feather="shopping-cart"></span>
               Comandes
             </a>
@@ -79,22 +106,17 @@
               Clients
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="tancarSessioAdmin.php">
-              <span data-feather="bar-chart-2"></span>
-              Sortir
-            </a>
-          </li>
         </ul>
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
         <!-- mostro el llistat de productes al dashboard de l'admin -->
+        <br>
         <h3 align="center">Llistat de Productes</h3>
-        <div>
-           <button type=“submit” id=“export_data” name=‘export_data’ value=“Export to excel” class=“btn btn-info”>Exportar a Excel</button>
-        </div><br>
+        <div  align="right">
+          <a href="formulari.php?opcio=1&cod=0"  class="btn btn-primary">Afegir Nous Productes</a>
+        </div>
         <table class="table">
           <tr>
               <th>Codi</th><th>Descripció</th><th>Preu</th><th>Stock</th><th>Estat</th><th>Imatge</th><th>Categoria</th><th>Editar</th>
@@ -113,7 +135,7 @@
                   <td><?php echo $row[2]?></td>
                   <td><?php echo $row[3]?></td>
                   <td><?php echo $row[4]?></td>
-                  <td><img src="../IMATGES/ <?php echo $row[6]?>" width="30" height="30"></td>
+                  <td><img src="../IMATGES/<?php echo $row[6]?>" width="50" height="50"></td>
                   <td><?php echo $row[7]?></td>
                   <td>
                       <a href="formulari.php?opcio=2&cod=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a> ||
@@ -125,17 +147,19 @@
             } 
         ?>
 
+       
         </table>
-
-        <h3 align="center">
-            <a href="formulari.php?opcio=1&cod=0" class="btn btn-primary">Afegir Nous Productes</a>
-      
     </main>
   </div>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+      <script src="/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
         <script src="dashboard.js"></script></body>
+    </body>
 </html>
+          

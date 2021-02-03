@@ -79,12 +79,6 @@
               Clients
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="tancarSessioAdmin.php">
-              <span data-feather="bar-chart-2"></span>
-              Sortir
-            </a>
-          </li>
         </ul>
     </nav>
 
@@ -110,8 +104,8 @@
                   <td><?php echo $row[2]?></td>
                   <td><?php echo $row[3]?></td>
                   <td>
-                      <a href="formulariClient.php?opcio=2&cod=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a> ||
-                      <a href="mantenimentClients.php?opcio=3&cod=<?php echo $row[0]?>" class="btn btn-danger" style="color:white;">Eliminar</a>
+                      <a href="formulariClient.php?opcio=2&codCli=<?php echo $row[0]?>" class="btn btn-success" style="color:white;">Modificar</a> ||
+                      <a href="mantenimentClients.php?opcio=3&codCli=<?php echo $row[0]?>" class="btn btn-danger" style="color:white;">Eliminar</a>
                   </td>
               </tr>
 

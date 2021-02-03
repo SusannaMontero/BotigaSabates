@@ -125,16 +125,16 @@ error_reporting(E_ALL ^ E_NOTICE);
                         $llista=$objMetodes->llistarProductesCod($id);
 
         // prova //////////////////////
-                    foreach ($llista as $row) {
-                        $nom = $row [1];
-                        $preu = $row [2];
-                    }
+                        foreach ($llista as $row) {
+                            $nom = $row [1];
+                            $preu = $row [2];
+                        }
 
                     // mostrem doncs
                        /* $nom=$llista[1];
                         $preu=$llista[2];*/
-                        $cost=$quantitat*$preu;
-                        $total=$total+$cost;
+                            $cost=$quantitat*$preu;
+                            $total=$total+$cost;
                         ?>
                 <tr>
                     <td><?php echo $nom; ?></td>

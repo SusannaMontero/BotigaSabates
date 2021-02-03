@@ -2,6 +2,7 @@
 
 include '../CON_BBDD/ConexioDB.php';
 include '../CLASSESREGISTRE/Producte.php';
+include '../CLASSESREGISTRE/Client.php';
 
 class MetodesAdmin  {
 
@@ -55,7 +56,7 @@ class MetodesAdmin  {
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
-        $res=$conOK->prepare ("INSERT INTO productes VALUES(null, '$pro->des', '$pro->preu', '$pro->stock', '$pro->estat', '$pro->detall','$pro->imatge', '$pro->categ')");
+        $res=$conOK->prepare ("INSERT INTO productes VALUES(null, '$pro->desc', '$pro->preu', '$pro->stock', '$pro->estat', '$pro->detall','$pro->imatge', '$pro->categ')");
         $res->execute();
         $conOK = null;
     }

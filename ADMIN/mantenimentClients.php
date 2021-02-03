@@ -28,6 +28,7 @@ switch ($opcio) {
 
         break;
 
+
     // si és case 3 elimino client
     case 3:
         $metodes = new MetodesAdmin();
