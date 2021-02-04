@@ -12,15 +12,12 @@ if(isset($_SESSION['cistella']))    {
     $codCli = $_SESSION['codCli'];
     $data = date("Y-m-d");
     $objCom = new Comanda(0, $codCli, $data);
-    echo ($codCli);
-    $objMet->registrarComanda($objCom);
+    $objMet->registrarComanda($codCli, $data);
+    
 
     // recullo el numero de la darrera comanda
    /* $ultimoPed = $objMet->numComanda();
     echo ($ultimoPed);
-    // recullo nom de la taula on insertar el detall de la comanda
-    $objTaula = new MetodesDAO();
-    $nomTaula = $objTaula->nomTaula($codCli);
 
     foreach ($_SESSION['cistella'] as $id=>$x)  {
         $objDetall = new DetallComanda($ultimoPed[0], $id, $x, $nomTaula);

@@ -183,10 +183,9 @@ class MetodesDAO    {
         $conOK=$con->getConnexio();
         $res=$conOK->prepare  ("CREATE TABLE $cli->nom
         (numComanda int NOT NULL, 
-        codPro int NOT NULL, 
+        codCli int NOT NULL, 
         can int NOT NULL, 
-        FOREIGN KEY (numComanda) REFERENCES comanda (numComanda),
-        FOREIGN KEY (codPro) REFERENCES productes (codPro));");
+        FOREIGN KEY (codCli) REFERENCES clients (codCli));");
        
         $res->execute();
                  
@@ -197,11 +196,13 @@ class MetodesDAO    {
 
         
 // Funció que em permet desar la nova comanda d'usuari
-    public function registrarComanda (Comanda $com)  {
+    public function registrarComanda ($codCli, $data)  {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
-        $res=$conOK->prepare ("INSERT INTO julio values (0,'$com->codCli', '$com->data')");
+
+
+        $res=$conOK->prepare ("INSERT INTO comanda values ('$com->codCli', '$com->data')");
         $confirmar = $res->execute();
 
         // tanco la connexió
