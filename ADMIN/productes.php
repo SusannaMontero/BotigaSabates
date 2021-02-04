@@ -62,7 +62,7 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">Generar EXCEL per categories:</a>
     </label>
     <label class="btn  active">
-      <a href="../EXPORTACIONS/generarXML.php">Dona</a>
+      <a href="../EXPORTACIONS/generarXLS.php">Dona</a>
     </label>
     <label class="btn active">
       <a href="../EXPORTACIONS/generarXMLH.php">Home</a>

@@ -11,6 +11,7 @@ include '../CLASSESREGISTRE/DetallComanda.php';
 
 
 
+
 class MetodesDAO    {
 
 // Funció per llistar els productes del catàleg que tinc a la BBDD fent un SELECT. Aquesta funció la crido a la pàgina BotigaDAO
@@ -67,29 +68,6 @@ class MetodesDAO    {
     
     }
 
-    /*
-// Funció per llistar catàleg segons la categoria seleccionada
-    public function llistarProductesCategoria ()  {
-
-        $con=new ConexioDB();
-        $conOK=$con->getConnexio();
-
-    // faig la consulta a la BBDD amb una sentència SELECT però aquí afegeixo el where per seleccionar segons el codi de producte
-
-        $res=$conOK->prepare ("select * from productes where categora = 'campera'");
-        $res->execute();
-
-        // tanco la connexió
-        $conOK = null;
-
-
-        foreach ($res as $row) {
-            $llistaDona[] = $row;
-        }
-
-        return $llistaDona;
-        
-    }*/
 
 // Funció que em permet llistar per preus els productes
     public function ordenarPerPreu()    {
@@ -223,7 +201,7 @@ class MetodesDAO    {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
-        $res=$conOK->prepare ("INSERT INTO comanda values (0,'$com->codCli', '$com->data')");
+        $res=$conOK->prepare ("INSERT INTO julio values (0,'$com->codCli', '$com->data')");
         $confirmar = $res->execute();
 
         // tanco la connexió
@@ -255,12 +233,12 @@ class MetodesDAO    {
         }   
 
 //  Funció que em permet treure el codi de Client per obtenir el seu nom d'usuari i així poder insertar el detall de la comanda a la taula corresponent
-    public function nomTaula (Comanda $com) {
+    public function nomTaula ($codCli) {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
-        $res=$conOk->prepare ("SELECT 'nom' FROM 'clients' WHERE 'codCli'='$com->codCli'");
+        $res=$conOk->prepare ("SELECT nom FROM clients WHERE codCli='$codCli'");
         $nomTa=$res->execute();
         $conOK=null;
 

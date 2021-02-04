@@ -5,25 +5,27 @@
 session_start();
 include './MetodesDAO.php';
 
+
 $objMet = New MetodesDAO();
 
 if(isset($_SESSION['cistella']))    {
     $codCli = $_SESSION['codCli'];
     $data = date("Y-m-d");
     $objCom = new Comanda(0, $codCli, $data);
+    echo ($codCli);
     $objMet->registrarComanda($objCom);
 
     // recullo el numero de la darrera comanda
-    $ultimoPed = $objMet->numComanda();
-    
+   /* $ultimoPed = $objMet->numComanda();
+    echo ($ultimoPed);
     // recullo nom de la taula on insertar el detall de la comanda
     $objTaula = new MetodesDAO();
-    $nomTaula = $objTaula->nomTaula($objCom);
+    $nomTaula = $objTaula->nomTaula($codCli);
 
     foreach ($_SESSION['cistella'] as $id=>$x)  {
         $objDetall = new DetallComanda($ultimoPed[0], $id, $x, $nomTaula);
         $objMet->insertarDetallComanda($objDetall);
-    }
+    }*/
 
     // elimino la sessió cistella per poder realitzar una nova compra si es vol
     
