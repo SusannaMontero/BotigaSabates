@@ -196,13 +196,13 @@ class MetodesDAO    {
 
         
 // Funció que em permet desar la nova comanda d'usuari
-    public function registrarComanda ($codCli, $data)  {
+    public function registrarComanda ($codCli,$nomT, $data)  {
 
         $con=new ConexioDB();
         $conOK=$con->getConnexio();
 
 
-        $res=$conOK->prepare ("INSERT INTO comanda values ('$com->codCli', '$com->data')");
+        $res=$conOK->prepare ("INSERT INTO $nomT values ('$com->codCli', '$com->data')");
         $confirmar = $res->execute();
 
         // tanco la connexió

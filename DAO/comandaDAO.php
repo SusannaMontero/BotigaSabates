@@ -10,10 +10,14 @@ $objMet = New MetodesDAO();
 
 if(isset($_SESSION['cistella']))    {
     $codCli = $_SESSION['codCli'];
-   // $nom = $_SESSION['nom'];
+    $nom = $_SESSION['nom'];
     $data = date("Y-m-d");
+
+    $nomTaula = new MetodesDAO();
+    $nomT = $nomTaula->nomTaula($codCli);
+
     $objCom = new Comanda(0, $codCli, $data);
-    $objMet->registrarComanda($codCli, $data);
+    $objMet->registrarComanda($codCli, $data, $nomT);
     
 
     // recullo el numero de la darrera comanda
