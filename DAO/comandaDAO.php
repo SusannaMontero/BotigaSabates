@@ -10,6 +10,7 @@ $objMet = New MetodesDAO();
 
 if(isset($_SESSION['cistella']))    {
     $codCli = $_SESSION['codCli'];
+   // $nom = $_SESSION['nom'];
     $data = date("Y-m-d");
     $objCom = new Comanda(0, $codCli, $data);
     $objMet->registrarComanda($codCli, $data);
